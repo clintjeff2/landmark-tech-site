@@ -1,22 +1,23 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { useState } from "react"
-import { Menu, X } from "lucide-react"
-import { ThemeToggle } from "./theme-toggle"
+import Link from "next/link";
+import Image from "next/image";
+import { useState } from "react";
+import { Menu, X } from "lucide-react";
+import { ThemeToggle } from "./theme-toggle";
 
 export default function Navigation() {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
 
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/about", label: "About" },
     { href: "/services", label: "Services" },
     { href: "/courses", label: "Courses" },
-    { href: "/testimonials", label: "Testimonials" },
+    { href: "/success", label: "Testimonies" },
     { href: "/faq", label: "FAQ" },
     { href: "/contact", label: "Contact" },
-  ]
+  ];
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-border">
@@ -24,11 +25,19 @@ export default function Navigation() {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-3 group">
-            <div className="w-10 h-10 rounded-lg gradient-purple-pink flex items-center justify-center group-hover:scale-110 transition-transform">
-              <span className="text-white font-bold text-xl">LT</span>
+            <div className="relative w-10 h-10 group-hover:scale-110 transition-transform">
+              <Image
+                src="/landmark-tech-logo.png"
+                alt="Landmark Technologies Logo"
+                width={40}
+                height={40}
+                className="object-contain"
+              />
             </div>
             <div className="flex flex-col">
-              <span className="text-foreground font-bold text-xl leading-tight">Landmark</span>
+              <span className="text-foreground font-bold text-l leading-tight">
+                Landmark Technologies
+              </span>
               <span className="text-muted-foreground text-xs">Since 2005</span>
             </div>
           </Link>
@@ -57,7 +66,11 @@ export default function Navigation() {
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center space-x-3">
             <ThemeToggle />
-            <button onClick={() => setIsOpen(!isOpen)} className="text-foreground p-2" aria-label="Toggle menu">
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="text-foreground p-2"
+              aria-label="Toggle menu"
+            >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
@@ -89,5 +102,5 @@ export default function Navigation() {
         </div>
       )}
     </nav>
-  )
+  );
 }

@@ -1,0 +1,23 @@
+{
+  "name": "Landmark Technologies - DevOps E. Degree Training",
+  "short_name": "Landmark Tech",
+  "description": "Transform your career with hands-on DevOps training from basic to expert level. $3,000 comprehensive program with job assistance and real-world projects.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#667eea",
+  "icons": [
+    {
+      "src": "/landmark-tech-logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/landmark-tech-logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

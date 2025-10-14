@@ -66,11 +66,6 @@ export default function Testimonials() {
 
               {/* Author */}
               <div className="flex items-center space-x-4 pt-4 border-t border-border">
-                <img
-                  src={testimonial.image || "/placeholder.svg"}
-                  alt={testimonial.name}
-                  className="w-12 h-12 rounded-full object-cover"
-                />
                 <div>
                   <div className="font-semibold text-foreground">{testimonial.name}</div>
                   <div className="text-sm text-muted-foreground">{testimonial.role}</div>
@@ -83,7 +78,7 @@ export default function Testimonials() {
         {/* Video Testimonials Section */}
         <div className="mt-16 text-center">
           <a
-            href="/testimonials"
+            href="/success"
             className="inline-flex items-center space-x-2 text-primary hover:text-primary/80 font-semibold transition-colors"
           >
             <span>Watch Video Testimonials</span>

@@ -1,0 +1,6 @@
+# robots.txt for Landmark Technologies
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://www.mylandmarktech.com/sitemap.xml

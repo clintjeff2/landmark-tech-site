@@ -1,114 +1,127 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import Navigation from "@/components/navigation"
-import Footer from "@/components/footer"
-import { useState } from "react"
-import { Check, ChevronRight, ChevronLeft, CreditCard, Lock } from "lucide-react"
+import Navigation from "@/components/navigation";
+import Footer from "@/components/footer";
+import { useState } from "react";
+import {
+  Check,
+  GraduationCap,
+  MapPin,
+  User,
+  Mail,
+  Phone,
+  Globe,
+} from "lucide-react";
 
 type FormData = {
-  // Step 1: Personal Information
-  fullName: string
-  email: string
-  phone: string
-  country: string
-  city: string
-
-  // Step 2: Program Details
-  cohort: string
-  schedule: string
-  skillLevel: string
-  hearAboutUs: string
-
-  // Step 3: Payment
-  paymentMethod: string
-  cardNumber: string
-  cardExpiry: string
-  cardCvc: string
-  billingAddress: string
-
-  // Terms
-  agreeToTerms: boolean
-  agreeToRefundPolicy: boolean
-}
+  fullName: string;
+  email: string;
+  phone: string;
+  country: string;
+  city: string;
+  cohort: string;
+  schedule: string;
+  skillLevel: string;
+  hearAboutUs: string;
+  additionalComments: string;
+  agreeToTerms: boolean;
+};
 
 export default function RegisterPage() {
-  const [currentStep, setCurrentStep] = useState(1)
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [formData, setFormData] = useState<FormData>({
     fullName: "",
     email: "",
     phone: "",
     country: "",
     city: "",
-    cohort: "",
+    cohort: "Class 41 - Sept 27, 2025",
     schedule: "",
     skillLevel: "",
     hearAboutUs: "",
-    paymentMethod: "card",
-    cardNumber: "",
-    cardExpiry: "",
-    cardCvc: "",
-    billingAddress: "",
+    additionalComments: "",
     agreeToTerms: false,
-    agreeToRefundPolicy: false,
-  })
+  });
 
-  const totalSteps = 3
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    const { name, value, type } = e.target
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
+    const { name, value, type } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: type === "checkbox" ? (e.target as HTMLInputElement).checked : value,
-    }))
-  }
-
-  const handleNext = () => {
-    if (currentStep < totalSteps) {
-      setCurrentStep(currentStep + 1)
-      window.scrollTo({ top: 0, behavior: "smooth" })
-    }
-  }
-
-  const handlePrevious = () => {
-    if (currentStep > 1) {
-      setCurrentStep(currentStep - 1)
-      window.scrollTo({ top: 0, behavior: "smooth" })
-    }
-  }
+      [name]:
+        type === "checkbox" ? (e.target as HTMLInputElement).checked : value,
+    }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
+    e.preventDefault();
+    setIsSubmitting(true);
 
     // Simulate form submission
     setTimeout(() => {
-      setIsSubmitting(false)
-      alert("Registration successful! You will receive a confirmation email shortly.")
-      // In production, redirect to success page
-    }, 2000)
-  }
+      setIsSubmitting(false);
+      setIsSubmitted(true);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }, 2000);
+  };
 
-  const isStepValid = () => {
-    switch (currentStep) {
-      case 1:
-        return formData.fullName && formData.email && formData.phone && formData.country && formData.city
-      case 2:
-        return formData.cohort && formData.schedule && formData.skillLevel
-      case 3:
-        return (
-          formData.cardNumber &&
-          formData.cardExpiry &&
-          formData.cardCvc &&
-          formData.billingAddress &&
-          formData.agreeToTerms &&
-          formData.agreeToRefundPolicy
-        )
-      default:
-        return false
-    }
+  if (isSubmitted) {
+    return (
+      <main className="min-h-screen bg-background">
+        <Navigation />
+        <section className="pt-32 pb-20">
+          <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-8">
+            <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto">
+              <Check size={40} className="text-primary" />
+            </div>
+            <h1 className="text-4xl md:text-5xl font-bold text-foreground">
+              Registration <span className="gradient-text">Submitted!</span>
+            </h1>
+            <p className="text-xl text-muted-foreground leading-relaxed">
+              Thank you for your interest in Landmark Technologies DevOps E.
+              Degree program. Our admissions team will contact you within 24-48
+              hours to complete your enrollment and discuss payment options.
+            </p>
+            <div className="p-6 rounded-xl bg-card border border-border space-y-4">
+              <h3 className="font-bold text-foreground text-lg">Next Steps:</h3>
+              <ul className="space-y-2 text-left text-muted-foreground">
+                <li className="flex items-start space-x-2">
+                  <span className="text-primary mt-1">1.</span>
+                  <span>Check your email for a confirmation message</span>
+                </li>
+                <li className="flex items-start space-x-2">
+                  <span className="text-primary mt-1">2.</span>
+                  <span>Our team will reach out via phone or WhatsApp</span>
+                </li>
+                <li className="flex items-start space-x-2">
+                  <span className="text-primary mt-1">3.</span>
+                  <span>We'll discuss payment options and schedule</span>
+                </li>
+                <li className="flex items-start space-x-2">
+                  <span className="text-primary mt-1">4.</span>
+                  <span>You'll receive access to the student portal</span>
+                </li>
+              </ul>
+            </div>
+            <div className="pt-6">
+              <a
+                href="/"
+                className="inline-flex items-center justify-center bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300"
+              >
+                Return to Home
+              </a>
+            </div>
+          </div>
+        </section>
+        <Footer />
+      </main>
+    );
   }
 
   return (
@@ -124,82 +137,67 @@ export default function RegisterPage() {
             Enroll in <span className="gradient-text">Class 41</span>
           </h1>
           <p className="text-lg text-muted-foreground">
-            Complete your registration to secure your spot in our DevOps E. Degree program
+            Start your DevOps career journey. Complete the form below and our
+            team will contact you.
           </p>
-        </div>
-      </section>
-
-      {/* Progress Steps */}
-      <section className="py-8">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between">
-            {[1, 2, 3].map((step) => (
-              <div key={step} className="flex items-center flex-1">
-                <div className="flex flex-col items-center flex-1">
-                  <div
-                    className={`w-12 h-12 rounded-full flex items-center justify-center font-bold transition-all ${
-                      step < currentStep
-                        ? "bg-primary text-white"
-                        : step === currentStep
-                          ? "bg-primary text-white ring-4 ring-primary/20"
-                          : "bg-card border-2 border-border text-muted-foreground"
-                    }`}
-                  >
-                    {step < currentStep ? <Check size={20} /> : step}
-                  </div>
-                  <div className="mt-2 text-sm font-medium text-center">
-                    <div className={step <= currentStep ? "text-foreground" : "text-muted-foreground"}>
-                      {step === 1 && "Personal Info"}
-                      {step === 2 && "Program Details"}
-                      {step === 3 && "Payment"}
-                    </div>
-                  </div>
-                </div>
-                {step < 3 && (
-                  <div className={`h-1 flex-1 mx-4 rounded ${step < currentStep ? "bg-primary" : "bg-border"}`} />
-                )}
-              </div>
-            ))}
+          <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold">
+            <GraduationCap size={16} />
+            <span>Class starts: Sept 27, 2025</span>
           </div>
         </div>
       </section>
 
-      {/* Form Content */}
+      {/* Form Section */}
       <section className="py-12 pb-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Main Form */}
             <div className="lg:col-span-2">
-              <form onSubmit={handleSubmit} className="p-8 rounded-2xl bg-card border border-border space-y-6">
-                {/* Step 1: Personal Information */}
-                {currentStep === 1 && (
-                  <div className="space-y-6">
-                    <div>
-                      <h2 className="text-2xl font-bold text-foreground mb-2">Personal Information</h2>
-                      <p className="text-muted-foreground">Tell us about yourself</p>
-                    </div>
+              <form
+                onSubmit={handleSubmit}
+                className="p-8 rounded-2xl bg-card border border-border space-y-8"
+              >
+                {/* Personal Information */}
+                <div className="space-y-6">
+                  <div className="flex items-center space-x-3 pb-4 border-b border-border">
+                    <User className="text-primary" size={24} />
+                    <h2 className="text-2xl font-bold text-foreground">
+                      Personal Information
+                    </h2>
+                  </div>
 
+                  <div>
+                    <label
+                      htmlFor="fullName"
+                      className="block text-sm font-semibold text-foreground mb-2"
+                    >
+                      Full Name *
+                    </label>
+                    <input
+                      type="text"
+                      id="fullName"
+                      name="fullName"
+                      value={formData.fullName}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary focus:outline-none text-foreground"
+                      placeholder="John Doe"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label htmlFor="fullName" className="block text-sm font-semibold text-foreground mb-2">
-                        Full Name *
+                      <label
+                        htmlFor="email"
+                        className="block text-sm font-semibold text-foreground mb-2"
+                      >
+                        Email Address *
                       </label>
-                      <input
-                        type="text"
-                        id="fullName"
-                        name="fullName"
-                        value={formData.fullName}
-                        onChange={handleChange}
-                        required
-                        className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary focus:outline-none text-foreground"
-                        placeholder="John Doe"
-                      />
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div>
-                        <label htmlFor="email" className="block text-sm font-semibold text-foreground mb-2">
-                          Email Address *
-                        </label>
+                      <div className="relative">
+                        <Mail
+                          className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+                          size={18}
+                        />
                         <input
                           type="email"
                           id="email"
@@ -207,15 +205,24 @@ export default function RegisterPage() {
                           value={formData.email}
                           onChange={handleChange}
                           required
-                          className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary focus:outline-none text-foreground"
+                          className="w-full pl-10 pr-4 py-3 rounded-lg bg-background border border-border focus:border-primary focus:outline-none text-foreground"
                           placeholder="john@example.com"
                         />
                       </div>
+                    </div>
 
-                      <div>
-                        <label htmlFor="phone" className="block text-sm font-semibold text-foreground mb-2">
-                          Phone Number *
-                        </label>
+                    <div>
+                      <label
+                        htmlFor="phone"
+                        className="block text-sm font-semibold text-foreground mb-2"
+                      >
+                        Phone Number (with country code) *
+                      </label>
+                      <div className="relative">
+                        <Phone
+                          className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+                          size={18}
+                        />
                         <input
                           type="tel"
                           id="phone"
@@ -223,39 +230,64 @@ export default function RegisterPage() {
                           value={formData.phone}
                           onChange={handleChange}
                           required
-                          className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary focus:outline-none text-foreground"
+                          className="w-full pl-10 pr-4 py-3 rounded-lg bg-background border border-border focus:border-primary focus:outline-none text-foreground"
                           placeholder="+1 (555) 000-0000"
                         />
                       </div>
                     </div>
+                  </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div>
-                        <label htmlFor="country" className="block text-sm font-semibold text-foreground mb-2">
-                          Country *
-                        </label>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label
+                        htmlFor="country"
+                        className="block text-sm font-semibold text-foreground mb-2"
+                      >
+                        Country *
+                      </label>
+                      <div className="relative">
+                        <Globe
+                          className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+                          size={18}
+                        />
                         <select
                           id="country"
                           name="country"
                           value={formData.country}
                           onChange={handleChange}
                           required
-                          className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary focus:outline-none text-foreground"
+                          className="w-full pl-10 pr-4 py-3 rounded-lg bg-background border border-border focus:border-primary focus:outline-none text-foreground appearance-none"
                         >
                           <option value="">Select country</option>
-                          <option value="US">United States</option>
-                          <option value="CA">Canada</option>
-                          <option value="UK">United Kingdom</option>
-                          <option value="IN">India</option>
-                          <option value="NG">Nigeria</option>
-                          <option value="other">Other</option>
+                          <option value="United States">United States</option>
+                          <option value="Canada">Canada</option>
+                          <option value="United Kingdom">United Kingdom</option>
+                          <option value="India">India</option>
+                          <option value="Nigeria">Nigeria</option>
+                          <option value="Cameroon">Cameroon</option>
+                          <option value="Ghana">Ghana</option>
+                          <option value="Kenya">Kenya</option>
+                          <option value="South Africa">South Africa</option>
+                          <option value="Australia">Australia</option>
+                          <option value="Germany">Germany</option>
+                          <option value="France">France</option>
+                          <option value="Other">Other</option>
                         </select>
                       </div>
+                    </div>
 
-                      <div>
-                        <label htmlFor="city" className="block text-sm font-semibold text-foreground mb-2">
-                          City *
-                        </label>
+                    <div>
+                      <label
+                        htmlFor="city"
+                        className="block text-sm font-semibold text-foreground mb-2"
+                      >
+                        City *
+                      </label>
+                      <div className="relative">
+                        <MapPin
+                          className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+                          size={18}
+                        />
                         <input
                           type="text"
                           id="city"
@@ -263,362 +295,299 @@ export default function RegisterPage() {
                           value={formData.city}
                           onChange={handleChange}
                           required
-                          className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary focus:outline-none text-foreground"
+                          className="w-full pl-10 pr-4 py-3 rounded-lg bg-background border border-border focus:border-primary focus:outline-none text-foreground"
                           placeholder="New York"
                         />
                       </div>
                     </div>
                   </div>
-                )}
-
-                {/* Step 2: Program Details */}
-                {currentStep === 2 && (
-                  <div className="space-y-6">
-                    <div>
-                      <h2 className="text-2xl font-bold text-foreground mb-2">Program Details</h2>
-                      <p className="text-muted-foreground">Choose your preferred schedule and cohort</p>
-                    </div>
-
-                    <div>
-                      <label htmlFor="cohort" className="block text-sm font-semibold text-foreground mb-2">
-                        Preferred Cohort *
-                      </label>
-                      <select
-                        id="cohort"
-                        name="cohort"
-                        value={formData.cohort}
-                        onChange={handleChange}
-                        required
-                        className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary focus:outline-none text-foreground"
-                      >
-                        <option value="">Select cohort</option>
-                        <option value="class41-jan">Class 41 - January 2025</option>
-                        <option value="class41-feb">Class 41 - February 2025</option>
-                        <option value="class41-mar">Class 41 - March 2025</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label htmlFor="schedule" className="block text-sm font-semibold text-foreground mb-2">
-                        Preferred Schedule *
-                      </label>
-                      <select
-                        id="schedule"
-                        name="schedule"
-                        value={formData.schedule}
-                        onChange={handleChange}
-                        required
-                        className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary focus:outline-none text-foreground"
-                      >
-                        <option value="">Select schedule</option>
-                        <option value="weekday-morning">Weekday Morning (9AM - 12PM EST)</option>
-                        <option value="weekday-evening">Weekday Evening (6PM - 9PM EST)</option>
-                        <option value="weekend">Weekend (10AM - 4PM EST)</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label htmlFor="skillLevel" className="block text-sm font-semibold text-foreground mb-2">
-                        Current Skill Level *
-                      </label>
-                      <select
-                        id="skillLevel"
-                        name="skillLevel"
-                        value={formData.skillLevel}
-                        onChange={handleChange}
-                        required
-                        className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary focus:outline-none text-foreground"
-                      >
-                        <option value="">Select skill level</option>
-                        <option value="beginner">Beginner (No IT experience)</option>
-                        <option value="intermediate">Intermediate (Some IT experience)</option>
-                        <option value="advanced">Advanced (Experienced IT professional)</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label htmlFor="hearAboutUs" className="block text-sm font-semibold text-foreground mb-2">
-                        How did you hear about us?
-                      </label>
-                      <select
-                        id="hearAboutUs"
-                        name="hearAboutUs"
-                        value={formData.hearAboutUs}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary focus:outline-none text-foreground"
-                      >
-                        <option value="">Select option</option>
-                        <option value="google">Google Search</option>
-                        <option value="social">Social Media</option>
-                        <option value="referral">Friend/Colleague Referral</option>
-                        <option value="youtube">YouTube</option>
-                        <option value="other">Other</option>
-                      </select>
-                    </div>
-                  </div>
-                )}
-
-                {/* Step 3: Payment */}
-                {currentStep === 3 && (
-                  <div className="space-y-6">
-                    <div>
-                      <h2 className="text-2xl font-bold text-foreground mb-2">Payment Information</h2>
-                      <p className="text-muted-foreground">Secure payment processing</p>
-                    </div>
-
-                    <div className="p-4 rounded-lg bg-primary/5 border border-primary/20">
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-foreground font-semibold">Program Fee</span>
-                        <span className="text-3xl font-bold gradient-text">$3,000</span>
-                      </div>
-                      <p className="text-sm text-muted-foreground">Non-refundable discounted fee for Class 41</p>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-semibold text-foreground mb-3">Payment Method *</label>
-                      <div className="grid grid-cols-2 gap-4">
-                        <label className="relative cursor-pointer">
-                          <input
-                            type="radio"
-                            name="paymentMethod"
-                            value="card"
-                            checked={formData.paymentMethod === "card"}
-                            onChange={handleChange}
-                            className="peer sr-only"
-                          />
-                          <div className="p-4 rounded-lg border-2 border-border peer-checked:border-primary peer-checked:bg-primary/5 transition-all">
-                            <CreditCard size={24} className="mx-auto mb-2 text-foreground" />
-                            <div className="text-center text-sm font-semibold text-foreground">Credit Card</div>
-                          </div>
-                        </label>
-
-                        <label className="relative cursor-pointer">
-                          <input
-                            type="radio"
-                            name="paymentMethod"
-                            value="paypal"
-                            checked={formData.paymentMethod === "paypal"}
-                            onChange={handleChange}
-                            className="peer sr-only"
-                          />
-                          <div className="p-4 rounded-lg border-2 border-border peer-checked:border-primary peer-checked:bg-primary/5 transition-all">
-                            <CreditCard size={24} className="mx-auto mb-2 text-foreground" />
-                            <div className="text-center text-sm font-semibold text-foreground">PayPal</div>
-                          </div>
-                        </label>
-                      </div>
-                    </div>
-
-                    {formData.paymentMethod === "card" && (
-                      <>
-                        <div>
-                          <label htmlFor="cardNumber" className="block text-sm font-semibold text-foreground mb-2">
-                            Card Number *
-                          </label>
-                          <input
-                            type="text"
-                            id="cardNumber"
-                            name="cardNumber"
-                            value={formData.cardNumber}
-                            onChange={handleChange}
-                            required
-                            placeholder="1234 5678 9012 3456"
-                            className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary focus:outline-none text-foreground"
-                          />
-                        </div>
-
-                        <div className="grid grid-cols-2 gap-6">
-                          <div>
-                            <label htmlFor="cardExpiry" className="block text-sm font-semibold text-foreground mb-2">
-                              Expiry Date *
-                            </label>
-                            <input
-                              type="text"
-                              id="cardExpiry"
-                              name="cardExpiry"
-                              value={formData.cardExpiry}
-                              onChange={handleChange}
-                              required
-                              placeholder="MM/YY"
-                              className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary focus:outline-none text-foreground"
-                            />
-                          </div>
-
-                          <div>
-                            <label htmlFor="cardCvc" className="block text-sm font-semibold text-foreground mb-2">
-                              CVC *
-                            </label>
-                            <input
-                              type="text"
-                              id="cardCvc"
-                              name="cardCvc"
-                              value={formData.cardCvc}
-                              onChange={handleChange}
-                              required
-                              placeholder="123"
-                              className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary focus:outline-none text-foreground"
-                            />
-                          </div>
-                        </div>
-
-                        <div>
-                          <label htmlFor="billingAddress" className="block text-sm font-semibold text-foreground mb-2">
-                            Billing Address *
-                          </label>
-                          <textarea
-                            id="billingAddress"
-                            name="billingAddress"
-                            value={formData.billingAddress}
-                            onChange={handleChange}
-                            required
-                            rows={3}
-                            className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary focus:outline-none text-foreground resize-none"
-                            placeholder="123 Main St, City, State, ZIP"
-                          />
-                        </div>
-                      </>
-                    )}
-
-                    <div className="space-y-4 pt-4 border-t border-border">
-                      <label className="flex items-start space-x-3 cursor-pointer">
-                        <input
-                          type="checkbox"
-                          name="agreeToTerms"
-                          checked={formData.agreeToTerms}
-                          onChange={handleChange}
-                          required
-                          className="mt-1 w-5 h-5 rounded border-border text-primary focus:ring-primary"
-                        />
-                        <span className="text-sm text-muted-foreground">
-                          I agree to the{" "}
-                          <a href="/terms" className="text-primary hover:underline">
-                            Terms of Service
-                          </a>{" "}
-                          and{" "}
-                          <a href="/privacy" className="text-primary hover:underline">
-                            Privacy Policy
-                          </a>
-                        </span>
-                      </label>
-
-                      <label className="flex items-start space-x-3 cursor-pointer">
-                        <input
-                          type="checkbox"
-                          name="agreeToRefundPolicy"
-                          checked={formData.agreeToRefundPolicy}
-                          onChange={handleChange}
-                          required
-                          className="mt-1 w-5 h-5 rounded border-border text-primary focus:ring-primary"
-                        />
-                        <span className="text-sm text-muted-foreground">
-                          I understand that the $3,000 fee for Class 41 is{" "}
-                          <strong className="text-foreground">non-refundable</strong> as stated in the syllabus
-                        </span>
-                      </label>
-                    </div>
-
-                    <div className="flex items-center space-x-2 p-4 rounded-lg bg-secondary/50 text-sm text-muted-foreground">
-                      <Lock size={16} className="text-primary flex-shrink-0" />
-                      <span>Your payment information is secure and encrypted</span>
-                    </div>
-                  </div>
-                )}
-
-                {/* Navigation Buttons */}
-                <div className="flex items-center justify-between pt-6 border-t border-border">
-                  {currentStep > 1 && (
-                    <button
-                      type="button"
-                      onClick={handlePrevious}
-                      className="inline-flex items-center space-x-2 px-6 py-3 rounded-lg border-2 border-border text-foreground hover:border-primary transition-all"
-                    >
-                      <ChevronLeft size={20} />
-                      <span>Previous</span>
-                    </button>
-                  )}
-
-                  {currentStep < totalSteps ? (
-                    <button
-                      type="button"
-                      onClick={handleNext}
-                      disabled={!isStepValid()}
-                      className="inline-flex items-center space-x-2 ml-auto bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-3 rounded-lg font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      <span>Next Step</span>
-                      <ChevronRight size={20} />
-                    </button>
-                  ) : (
-                    <button
-                      type="submit"
-                      disabled={!isStepValid() || isSubmitting}
-                      className="inline-flex items-center space-x-2 ml-auto bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-3 rounded-lg font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      <Lock size={18} />
-                      <span>{isSubmitting ? "Processing..." : "Complete Registration"}</span>
-                    </button>
-                  )}
                 </div>
+
+                {/* Program Preferences */}
+                <div className="space-y-6">
+                  <div className="flex items-center space-x-3 pb-4 border-b border-border">
+                    <GraduationCap className="text-primary" size={24} />
+                    <h2 className="text-2xl font-bold text-foreground">
+                      Program Preferences
+                    </h2>
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="cohort"
+                      className="block text-sm font-semibold text-foreground mb-2"
+                    >
+                      Cohort *
+                    </label>
+                    <select
+                      id="cohort"
+                      name="cohort"
+                      value={formData.cohort}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary focus:outline-none text-foreground"
+                    >
+                      <option value="Class 41 - Sept 27, 2025">
+                        Class 41 - Sept 27, 2025
+                      </option>
+                    </select>
+                    <p className="mt-2 text-sm text-muted-foreground">
+                      Sept 27, 2025 - Feb 28, 2026 | Mon, Tue, Sat: 7-10 PM EST
+                    </p>
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="schedule"
+                      className="block text-sm font-semibold text-foreground mb-2"
+                    >
+                      Preferred Schedule *
+                    </label>
+                    <select
+                      id="schedule"
+                      name="schedule"
+                      value={formData.schedule}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary focus:outline-none text-foreground"
+                    >
+                      <option value="">Select schedule</option>
+                      <option value="Mon-Tue-Sat">
+                        Mon, Tue, Sat (7-10 PM EST)
+                      </option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="skillLevel"
+                      className="block text-sm font-semibold text-foreground mb-2"
+                    >
+                      Current Skill Level *
+                    </label>
+                    <select
+                      id="skillLevel"
+                      name="skillLevel"
+                      value={formData.skillLevel}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary focus:outline-none text-foreground"
+                    >
+                      <option value="">Select skill level</option>
+                      <option value="No IT Background">
+                        No IT Background (Complete Beginner)
+                      </option>
+                      <option value="Some IT Knowledge">
+                        Some IT Knowledge
+                      </option>
+                      <option value="Intermediate">Intermediate</option>
+                      <option value="Advanced">
+                        Advanced (Want to Upgrade)
+                      </option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="hearAboutUs"
+                      className="block text-sm font-semibold text-foreground mb-2"
+                    >
+                      How did you hear about us? *
+                    </label>
+                    <select
+                      id="hearAboutUs"
+                      name="hearAboutUs"
+                      value={formData.hearAboutUs}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary focus:outline-none text-foreground"
+                    >
+                      <option value="">Select option</option>
+                      <option value="YouTube">YouTube</option>
+                      <option value="Google Search">Google Search</option>
+                      <option value="LinkedIn">LinkedIn</option>
+                      <option value="Facebook">Facebook</option>
+                      <option value="Friend/Colleague Referral">
+                        Friend/Colleague Referral
+                      </option>
+                      <option value="Alumni Referral">Alumni Referral</option>
+                      <option value="WhatsApp">WhatsApp</option>
+                      <option value="Telegram">Telegram</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="additionalComments"
+                      className="block text-sm font-semibold text-foreground mb-2"
+                    >
+                      Additional Comments or Questions (Optional)
+                    </label>
+                    <textarea
+                      id="additionalComments"
+                      name="additionalComments"
+                      value={formData.additionalComments}
+                      onChange={handleChange}
+                      rows={4}
+                      className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary focus:outline-none text-foreground resize-none"
+                      placeholder="Tell us about your goals or any questions you have..."
+                    />
+                  </div>
+                </div>
+
+                {/* Terms and Conditions */}
+                <div className="space-y-4 pt-4 border-t border-border">
+                  <label className="flex items-start space-x-3 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      name="agreeToTerms"
+                      checked={formData.agreeToTerms}
+                      onChange={handleChange}
+                      required
+                      className="mt-1 w-5 h-5 rounded border-border text-primary focus:ring-primary"
+                    />
+                    <span className="text-sm text-muted-foreground leading-relaxed">
+                      I agree to the terms and conditions and understand that
+                      the admissions team will contact me to discuss payment
+                      options. I understand the program fee is $3,000 USD which
+                      can be paid in installments of $750/month. *
+                    </span>
+                  </label>
+                </div>
+
+                {/* Submit Button */}
+                <button
+                  type="submit"
+                  disabled={isSubmitting || !formData.agreeToTerms}
+                  className="w-full bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:scale-[1.02]"
+                >
+                  {isSubmitting ? "Submitting..." : "Submit Registration"}
+                </button>
               </form>
             </div>
 
             {/* Sidebar */}
-            <div className="space-y-6">
-              {/* Order Summary */}
+            <div className="lg:col-span-1 space-y-6">
+              {/* Program Summary */}
               <div className="p-6 rounded-xl bg-card border border-border space-y-4 sticky top-24">
-                <h3 className="text-lg font-bold text-foreground">Order Summary</h3>
+                <h3 className="text-xl font-bold text-foreground">
+                  Program Summary
+                </h3>
 
-                <div className="space-y-3 py-4 border-y border-border">
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-muted-foreground">DevOps E. Degree</span>
-                    <span className="font-semibold text-foreground">$20,000</span>
+                <div className="space-y-3 text-sm">
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Program</span>
+                    <span className="font-semibold text-foreground">
+                      DevOps E. Degree
+                    </span>
                   </div>
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-green-600">Class 41 Discount</span>
-                    <span className="font-semibold text-green-600">-$17,000</span>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Duration</span>
+                    <span className="font-semibold text-foreground">
+                      4.5 Months
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Total Hours</span>
+                    <span className="font-semibold text-foreground">
+                      206 Hours
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Modules</span>
+                    <span className="font-semibold text-foreground">
+                      15 Modules
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Projects</span>
+                    <span className="font-semibold text-foreground">
+                      6 Real-World
+                    </span>
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between">
-                  <span className="text-lg font-bold text-foreground">Total</span>
-                  <span className="text-3xl font-bold gradient-text">$3,000</span>
+                <div className="pt-4 border-t border-border">
+                  <div className="flex justify-between items-baseline mb-2">
+                    <span className="text-muted-foreground">Program Fee</span>
+                    <div className="text-right">
+                      <div className="text-2xl font-bold gradient-text">
+                        $3,000
+                      </div>
+                      <div className="text-xs text-muted-foreground">
+                        Installments available
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
-                <div className="pt-4 space-y-2 text-sm text-muted-foreground">
+                <div className="pt-4 border-t border-border space-y-2">
                   <div className="flex items-start space-x-2">
-                    <Check size={16} className="text-primary flex-shrink-0 mt-0.5" />
-                    <span>185+ hours of training</span>
+                    <Check
+                      size={16}
+                      className="text-primary mt-0.5 flex-shrink-0"
+                    />
+                    <span className="text-xs text-muted-foreground">
+                      Lifetime access to materials
+                    </span>
                   </div>
                   <div className="flex items-start space-x-2">
-                    <Check size={16} className="text-primary flex-shrink-0 mt-0.5" />
-                    <span>6 real-world projects</span>
+                    <Check
+                      size={16}
+                      className="text-primary mt-0.5 flex-shrink-0"
+                    />
+                    <span className="text-xs text-muted-foreground">
+                      Job assistance & resume prep
+                    </span>
                   </div>
                   <div className="flex items-start space-x-2">
-                    <Check size={16} className="text-primary flex-shrink-0 mt-0.5" />
-                    <span>Job assistance included</span>
+                    <Check
+                      size={16}
+                      className="text-primary mt-0.5 flex-shrink-0"
+                    />
+                    <span className="text-xs text-muted-foreground">
+                      Certificate of completion
+                    </span>
                   </div>
                   <div className="flex items-start space-x-2">
-                    <Check size={16} className="text-primary flex-shrink-0 mt-0.5" />
-                    <span>Lifetime access to materials</span>
-                  </div>
-                  <div className="flex items-start space-x-2">
-                    <Check size={16} className="text-primary flex-shrink-0 mt-0.5" />
-                    <span>Certificate of completion</span>
+                    <Check
+                      size={16}
+                      className="text-primary mt-0.5 flex-shrink-0"
+                    />
+                    <span className="text-xs text-muted-foreground">
+                      Alumni community access
+                    </span>
                   </div>
                 </div>
               </div>
 
-              {/* Help */}
+              {/* Contact Info */}
               <div className="p-6 rounded-xl bg-primary/5 border border-primary/20 space-y-3">
                 <h3 className="font-bold text-foreground">Need Help?</h3>
                 <p className="text-sm text-muted-foreground">
-                  Have questions about registration? Our team is here to help.
+                  Contact our admissions team:
                 </p>
-                <a
-                  href="/contact"
-                  className="block w-full text-center bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-white px-4 py-2 rounded-lg font-semibold text-sm transition-all"
-                >
-                  Contact Support
-                </a>
+                <div className="space-y-2 text-sm">
+                  <div className="flex items-center space-x-2">
+                    <Phone size={14} className="text-primary" />
+                    <a
+                      href="tel:+14372152483"
+                      className="text-foreground hover:text-primary"
+                    >
+                      +1 437 215 2483
+                    </a>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Mail size={14} className="text-primary" />
+                    <a
+                      href="mailto:mylandmarktech@gmail.com"
+                      className="text-foreground hover:text-primary"
+                    >
+                      mylandmarktech@gmail.com
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -627,5 +596,5 @@ export default function RegisterPage() {
 
       <Footer />
     </main>
-  )
+  );
 }

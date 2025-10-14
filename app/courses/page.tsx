@@ -1,7 +1,7 @@
-import Navigation from "@/components/navigation"
-import Footer from "@/components/footer"
-import Link from "next/link"
-import { Download, Clock, CheckCircle, BookOpen, Award } from "lucide-react"
+import Navigation from "@/components/navigation";
+import Footer from "@/components/footer";
+import Link from "next/link";
+import { Download, Clock, CheckCircle, BookOpen, Award } from "lucide-react";
 
 export default function CoursesPage() {
   const courseModules = [
@@ -11,9 +11,10 @@ export default function CoursesPage() {
       duration: "4 hours",
       topics: [
         "Software Development Life Cycles (SDLC)",
-        "Waterfall Model & Agile Methodology",
+        "Waterfall, Agile & Scrum Methodologies",
         "What is DevOps and Why DevOps?",
-        "DevOps Life cycle and Tools",
+        "DevOps Model & Life Cycle",
+        "DevOps Tools Overview",
         "Market Trend and Career Scope",
       ],
     },
@@ -22,12 +23,13 @@ export default function CoursesPage() {
       title: "Linux Administration",
       duration: "27 hours",
       topics: [
+        "Installing SSH & FTP Tools",
+        "Create AWS Account & EC2 Instance",
         "Linux Command Line & File Structure",
         "40+ Essential Linux Commands",
         "User & Group Management",
         "File Permissions & Ownership",
         "Process Management & Monitoring",
-        "SSH & Remote Access",
       ],
     },
     {
@@ -37,10 +39,10 @@ export default function CoursesPage() {
       topics: [
         "Shell Types & Scripting Basics",
         "Variables & Command Line Arguments",
-        "Control Structures (if, for, while)",
+        "Control Structures (if, for, while, switch)",
         "Functions & String Operations",
-        "Input/Output Redirection",
-        "Automation Scripts",
+        "Input/Output Redirection & Pipes",
+        "Automation Scripts & Best Practices",
       ],
     },
     {
@@ -48,11 +50,11 @@ export default function CoursesPage() {
       title: "Git & GitHub",
       duration: "12 hours",
       topics: [
-        "Version Control Systems (VCS)",
+        "Version Control Systems (VCS) & SCM",
         "Git Installation & Configuration",
         "Branching & Merging Strategies",
-        "SSH Key Generation & PAT",
-        "Cloning & Forking Repositories",
+        "SSH Key Generation & PAT Creation",
+        "Cloning, Forking & Repository Management",
         "Best Practices for Code Commits",
       ],
     },
@@ -65,17 +67,18 @@ export default function CoursesPage() {
         "Installation & Directory Structure",
         "POM.xml Configuration",
         "Maven Repositories & Life Cycles",
-        "Multi-Module Projects",
+        "Multi-Module Projects (Parent & Child POM)",
         "Maven Profiles",
       ],
     },
     {
       id: "tomcat",
-      title: "Tomcat & Application Servers",
-      duration: "4 hours",
+      title: "Tomcat Application Server",
+      duration: "6 hours",
       topics: [
-        "Web Servers vs App Servers",
-        "Tomcat Installation & Configuration",
+        "Web Servers vs App Servers vs Database Servers",
+        "Tomcat Installation (Windows & Linux)",
+        "Directory Structure & Server Management",
         "User & Role Management",
         "Application Deployment Methods",
         "Port Configuration & Tuning",
@@ -83,15 +86,27 @@ export default function CoursesPage() {
       ],
     },
     {
+      id: "apache",
+      title: "Apache HTTP Server",
+      duration: "4 hours",
+      topics: [
+        "Apache HTTP Server Introduction",
+        "Installation & Configuration",
+        "Directory Structure",
+        "Starting & Managing HTTP Server",
+        "Deploying Static Web Applications",
+      ],
+    },
+    {
       id: "sonarqube",
       title: "SonarQube Code Quality",
       duration: "4 hours",
       topics: [
-        "Code Quality Analysis",
+        "Code Quality Analysis Introduction",
         "SonarQube Architecture & Installation",
         "User & Project Management",
-        "Quality Profiles & Gates",
-        "Token Generation",
+        "Quality Profiles & Quality Gates",
+        "Token Generation & Security",
         "Email Configuration",
       ],
     },
@@ -102,10 +117,10 @@ export default function CoursesPage() {
       topics: [
         "Artifact Repository Management",
         "Nexus Installation & Configuration",
-        "Repository Creation",
+        "Password & Email Setup for Admin",
+        "Repository Creation & Management",
         "Maven-Nexus Integration",
-        "User Management",
-        "Port & Context Configuration",
+        "Port & Context Root Configuration",
       ],
     },
     {
@@ -113,16 +128,16 @@ export default function CoursesPage() {
       title: "Jenkins CI/CD",
       duration: "24 hours",
       topics: [
-        "Continuous Integration/Delivery/Deployment",
+        "Continuous Integration/Delivery/Deployment Concepts",
         "Jenkins Installation & Configuration",
-        "Freestyle & Maven Projects",
+        "Freestyle & Maven Project Types",
         "Pipeline as Code (Jenkinsfile)",
-        "Multi-branch Pipelines",
+        "Multi-branch Pipelines & Git Webhooks",
         "Master-Slave Architecture",
-        "Plugin Management",
+        "Plugin Management (40+ plugins)",
         "Integration with Git, Maven, SonarQube, Nexus",
-        "Deployment Automation",
-        "Jenkins Security & Backup",
+        "Deployment Automation & Email Notifications",
+        "Jenkins Security, Backup & Migration",
       ],
     },
     {
@@ -132,30 +147,30 @@ export default function CoursesPage() {
       topics: [
         "Containerization vs Virtualization",
         "Docker Architecture & Installation",
-        "Dockerfile Creation",
-        "Docker Images & Containers",
+        "Dockerfile Creation & Best Practices",
+        "Docker Images & Container Management",
         "Docker Networks & Volumes",
-        "Docker Compose",
-        "Docker Swarm",
-        "Private Docker Registry",
+        "Docker Compose for Multi-Container Apps",
+        "Docker Swarm Orchestration",
+        "Private Docker Registry Setup",
       ],
     },
     {
       id: "kubernetes",
-      title: "Kubernetes Orchestration",
+      title: "Kubernetes Orchestration (CKA)",
       duration: "27 hours",
       topics: [
-        "Kubernetes Architecture",
-        "Cluster Setup with Kubeadm",
+        "Kubernetes Architecture & Components",
+        "Cluster Setup with Kubeadm (Self-Managed)",
         "Pods, ReplicaSets, Deployments",
         "Services (ClusterIP, NodePort, LoadBalancer)",
-        "ConfigMaps & Secrets",
+        "ConfigMaps, Secrets & Environment Variables",
         "Persistent Volumes & Claims",
-        "StatefulSets & DaemonSets",
+        "StatefulSets, DaemonSets & Jobs",
         "HPA & Metrics Server",
-        "KOPS & EKS Setup",
-        "Ingress Controllers",
-        "RBAC & Security",
+        "KOPS & EKS Cluster Setup",
+        "Ingress Controllers & Resources",
+        "RBAC & Security Best Practices",
         "Helm Package Manager",
         "Monitoring with Prometheus & Grafana",
       ],
@@ -165,14 +180,14 @@ export default function CoursesPage() {
       title: "Ansible Automation",
       duration: "16 hours",
       topics: [
-        "Configuration Management",
-        "Ansible Architecture",
-        "SSH Key Setup",
-        "Ad-hoc Commands",
-        "Playbooks & Modules",
-        "Variables & Loops",
-        "Roles & Galaxy",
-        "Ansible Vault",
+        "Configuration Management Introduction",
+        "Ansible Architecture & Components",
+        "SSH Key Generation & Setup",
+        "Ansible Ad-hoc Commands",
+        "Playbooks, Modules & Tasks",
+        "Variables, Loops & Conditions",
+        "Roles & Ansible Galaxy",
+        "Ansible Vault for Secrets Management",
         "Dynamic Inventory",
       ],
     },
@@ -182,16 +197,16 @@ export default function CoursesPage() {
       duration: "32 hours",
       topics: [
         "Cloud Computing Fundamentals (IaaS, PaaS, SaaS)",
-        "EC2 Instances & AMIs",
+        "EC2 Instances, AMIs & User Data",
         "Security Groups & Elastic IPs",
-        "EBS Volumes & Snapshots",
-        "EFS File Systems",
-        "S3 Storage & Lifecycle Management",
-        "IAM Users, Groups & Policies",
-        "VPC & Networking",
-        "Load Balancers",
-        "Auto Scaling",
+        "EBS Volumes, Snapshots & EFS",
+        "S3 Storage, Versioning & Lifecycle Management",
+        "IAM Users, Groups, Roles & Policies",
+        "VPC, Subnets, NAT & ACLs",
+        "Elastic Load Balancers (ELB)",
+        "Auto Scaling Groups & Policies",
         "CloudWatch Monitoring",
+        "AWS CI/CD Setup",
       ],
     },
     {
@@ -199,17 +214,17 @@ export default function CoursesPage() {
       title: "Terraform Infrastructure as Code",
       duration: "12 hours",
       topics: [
-        "Infrastructure as Code Concepts",
-        "Terraform Installation & Setup",
-        "Terraform Configuration Language",
-        "Providers & Resources",
-        "State Management",
+        "Infrastructure as Code (IaaC) Concepts",
+        "Terraform Installation (Windows & Linux)",
+        "Terraform Configuration Language (HCL)",
+        "Providers, Resources & Data Sources",
+        "State Management & Remote State",
         "Modules & Workspaces",
-        "Terraform with AWS",
-        "Integration with Ansible",
+        "Terraform with AWS Integration",
+        "Infrastructure Automation with Terraform & Ansible",
       ],
     },
-  ]
+  ];
 
   const projects = [
     {
@@ -219,25 +234,30 @@ export default function CoursesPage() {
     },
     {
       title: "Jenkins + GitHub + Maven + SonarQube + Nexus + Docker",
-      description: "Containerized deployment pipeline with automated Docker image builds and registry management",
+      description:
+        "Containerized deployment pipeline with automated Docker image builds and registry management",
     },
     {
       title: "Jenkins + Maven + SonarQube + Ansible + Docker",
-      description: "Configuration management and container orchestration with automated deployments",
+      description:
+        "Configuration management and container orchestration with automated deployments",
     },
     {
       title: "Jenkins + Maven + SonarQube + Docker + Docker Swarm",
-      description: "Multi-container orchestration with Docker Swarm for high availability",
+      description:
+        "Multi-container orchestration with Docker Swarm for high availability",
     },
     {
       title: "Jenkins + Maven + SonarQube + Docker + Kubernetes",
-      description: "Production-grade Kubernetes deployment with automated scaling and monitoring",
+      description:
+        "Production-grade Kubernetes deployment with automated scaling and monitoring",
     },
     {
       title: "Infrastructure Automation with Terraform + Ansible",
-      description: "Complete infrastructure provisioning and configuration management on AWS",
+      description:
+        "Complete infrastructure provisioning and configuration management on AWS",
     },
-  ]
+  ];
 
   return (
     <main className="min-h-screen">
@@ -251,33 +271,41 @@ export default function CoursesPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
               <h1 className="text-5xl md:text-6xl font-bold text-foreground text-balance">
-                DevOps E. Degree <span className="gradient-text">Curriculum</span>
+                DevOps E. Degree{" "}
+                <span className="gradient-text">Curriculum</span>
               </h1>
               <p className="text-xl text-muted-foreground leading-relaxed text-pretty">
-                Comprehensive hands-on training covering all essential DevOps tools and practices. From Linux
-                fundamentals to advanced Kubernetes orchestration.
+                Comprehensive hands-on training covering all essential DevOps
+                tools and practices. From Linux fundamentals to advanced
+                Kubernetes orchestration.
               </p>
 
               <div className="flex flex-wrap gap-6 pt-4">
                 <div className="flex items-center space-x-3">
                   <Clock size={24} className="text-primary" />
                   <div>
-                    <div className="font-bold text-foreground">185+ Hours</div>
-                    <div className="text-sm text-muted-foreground">Total Training</div>
+                    <div className="font-bold text-foreground">206 Hours</div>
+                    <div className="text-sm text-muted-foreground">
+                      Total Training
+                    </div>
                   </div>
                 </div>
                 <div className="flex items-center space-x-3">
                   <BookOpen size={24} className="text-primary" />
                   <div>
-                    <div className="font-bold text-foreground">14 Modules</div>
-                    <div className="text-sm text-muted-foreground">Comprehensive</div>
+                    <div className="font-bold text-foreground">15 Modules</div>
+                    <div className="text-sm text-muted-foreground">
+                      Comprehensive
+                    </div>
                   </div>
                 </div>
                 <div className="flex items-center space-x-3">
                   <Award size={24} className="text-primary" />
                   <div>
                     <div className="font-bold text-foreground">6 Projects</div>
-                    <div className="text-sm text-muted-foreground">Real-world</div>
+                    <div className="text-sm text-muted-foreground">
+                      Real-world
+                    </div>
                   </div>
                 </div>
               </div>
@@ -290,11 +318,14 @@ export default function CoursesPage() {
                   Enroll Now - $3,000
                 </Link>
                 <a
-                  href="/devops-syllabus-2025.pdf"
+                  href="/Syllabus - DevOps E. Degree 2025.pdf"
                   download
                   className="inline-flex items-center justify-center bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 group"
                 >
-                  <Download size={20} className="mr-2 group-hover:translate-y-0.5 transition-transform" />
+                  <Download
+                    size={20}
+                    className="mr-2 group-hover:translate-y-0.5 transition-transform"
+                  />
                   Download Syllabus
                 </a>
               </div>
@@ -303,31 +334,63 @@ export default function CoursesPage() {
             <div className="relative">
               <div className="p-8 rounded-2xl bg-card border-2 border-primary/20 shadow-2xl space-y-6">
                 <div className="space-y-4">
-                  <h3 className="text-2xl font-bold text-foreground">Program Highlights</h3>
+                  <h3 className="text-2xl font-bold text-foreground">
+                    Program Highlights
+                  </h3>
                   <ul className="space-y-3">
                     <li className="flex items-start space-x-3">
-                      <CheckCircle size={20} className="text-primary flex-shrink-0 mt-0.5" />
-                      <span className="text-foreground">Hands-on training from basic to expert level</span>
+                      <CheckCircle
+                        size={20}
+                        className="text-primary flex-shrink-0 mt-0.5"
+                      />
+                      <span className="text-foreground">
+                        Hands-on training from basic to expert level
+                      </span>
                     </li>
                     <li className="flex items-start space-x-3">
-                      <CheckCircle size={20} className="text-primary flex-shrink-0 mt-0.5" />
-                      <span className="text-foreground">Real-time use case scenarios</span>
+                      <CheckCircle
+                        size={20}
+                        className="text-primary flex-shrink-0 mt-0.5"
+                      />
+                      <span className="text-foreground">
+                        Real-time use case scenarios
+                      </span>
                     </li>
                     <li className="flex items-start space-x-3">
-                      <CheckCircle size={20} className="text-primary flex-shrink-0 mt-0.5" />
-                      <span className="text-foreground">Soft copy materials & interview questions</span>
+                      <CheckCircle
+                        size={20}
+                        className="text-primary flex-shrink-0 mt-0.5"
+                      />
+                      <span className="text-foreground">
+                        Soft copy materials & interview questions
+                      </span>
                     </li>
                     <li className="flex items-start space-x-3">
-                      <CheckCircle size={20} className="text-primary flex-shrink-0 mt-0.5" />
-                      <span className="text-foreground">Resume preparation & job assistance</span>
+                      <CheckCircle
+                        size={20}
+                        className="text-primary flex-shrink-0 mt-0.5"
+                      />
+                      <span className="text-foreground">
+                        Resume preparation & job assistance
+                      </span>
                     </li>
                     <li className="flex items-start space-x-3">
-                      <CheckCircle size={20} className="text-primary flex-shrink-0 mt-0.5" />
-                      <span className="text-foreground">6 comprehensive real-world projects</span>
+                      <CheckCircle
+                        size={20}
+                        className="text-primary flex-shrink-0 mt-0.5"
+                      />
+                      <span className="text-foreground">
+                        6 comprehensive real-world projects
+                      </span>
                     </li>
                     <li className="flex items-start space-x-3">
-                      <CheckCircle size={20} className="text-primary flex-shrink-0 mt-0.5" />
-                      <span className="text-foreground">Certificate of completion</span>
+                      <CheckCircle
+                        size={20}
+                        className="text-primary flex-shrink-0 mt-0.5"
+                      />
+                      <span className="text-foreground">
+                        Certificate of completion
+                      </span>
                     </li>
                   </ul>
                 </div>
@@ -336,8 +399,12 @@ export default function CoursesPage() {
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-muted-foreground">Program Fee</span>
                     <div className="text-right">
-                      <div className="text-3xl font-bold text-foreground">$3,000</div>
-                      <div className="text-xs text-muted-foreground">Non-refundable (Class 41)</div>
+                      <div className="text-3xl font-bold text-foreground">
+                        $3,000
+                      </div>
+                      <div className="text-xs text-muted-foreground">
+                        Non-refundable (Class 41)
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -355,7 +422,8 @@ export default function CoursesPage() {
               Course <span className="gradient-text">Modules</span>
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              14 comprehensive modules covering all essential DevOps tools and practices
+              15 comprehensive modules covering all essential DevOps tools and
+              practices
             </p>
           </div>
 
@@ -371,7 +439,9 @@ export default function CoursesPage() {
                       <span className="text-white font-bold">{index + 1}</span>
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-foreground mb-1">{module.title}</h3>
+                      <h3 className="text-xl font-bold text-foreground mb-1">
+                        {module.title}
+                      </h3>
                       <div className="flex items-center space-x-2 text-muted-foreground text-sm">
                         <Clock size={14} />
                         <span>{module.duration}</span>
@@ -382,7 +452,10 @@ export default function CoursesPage() {
 
                 <ul className="space-y-2 pl-16">
                   {module.topics.map((topic, idx) => (
-                    <li key={idx} className="text-sm text-muted-foreground flex items-start space-x-2">
+                    <li
+                      key={idx}
+                      className="text-sm text-muted-foreground flex items-start space-x-2"
+                    >
                       <span className="text-primary mt-1">•</span>
                       <span>{topic}</span>
                     </li>
@@ -402,7 +475,8 @@ export default function CoursesPage() {
               Real-World <span className="gradient-text">Projects</span>
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Apply your skills to 6 comprehensive projects that mirror production environments
+              Apply your skills to 6 comprehensive projects that mirror
+              production environments
             </p>
           </div>
 
@@ -413,10 +487,16 @@ export default function CoursesPage() {
                 className="p-6 rounded-xl bg-card border border-border hover:border-primary/50 transition-all duration-300 space-y-4"
               >
                 <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                  <span className="text-primary font-bold text-xl">{index + 1}</span>
+                  <span className="text-primary font-bold text-xl">
+                    {index + 1}
+                  </span>
                 </div>
-                <h3 className="text-lg font-bold text-foreground leading-tight">{project.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{project.description}</p>
+                <h3 className="text-lg font-bold text-foreground leading-tight">
+                  {project.title}
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {project.description}
+                </p>
               </div>
             ))}
           </div>
@@ -435,16 +515,24 @@ export default function CoursesPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="p-6 rounded-xl bg-background border-2 border-border space-y-4">
-                <h3 className="text-xl font-bold text-foreground">Standard Fee</h3>
-                <div className="text-4xl font-bold text-muted-foreground line-through">$20,000</div>
-                <p className="text-muted-foreground">Refundable standard program fee</p>
+                <h3 className="text-xl font-bold text-foreground">
+                  Standard Fee
+                </h3>
+                <div className="text-4xl font-bold text-muted-foreground line-through">
+                  $20,000
+                </div>
+                <p className="text-muted-foreground">
+                  Refundable standard program fee
+                </p>
               </div>
 
               <div className="p-6 rounded-xl bg-background border-2 border-primary/50 space-y-4 relative overflow-hidden">
                 <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-primary text-white text-xs font-bold">
                   CLASS 41
                 </div>
-                <h3 className="text-xl font-bold text-foreground">Discounted Fee</h3>
+                <h3 className="text-xl font-bold text-foreground">
+                  Discounted Fee
+                </h3>
                 <div className="text-4xl font-bold gradient-text">$3,000</div>
                 <p className="text-muted-foreground">
                   <strong>Non-refundable</strong> discounted fee for Class 41
@@ -453,24 +541,44 @@ export default function CoursesPage() {
             </div>
 
             <div className="p-6 rounded-xl bg-primary/5 border border-primary/20 space-y-4">
-              <h3 className="text-lg font-bold text-foreground">Important Notes</h3>
+              <h3 className="text-lg font-bold text-foreground">
+                Important Notes
+              </h3>
               <ul className="space-y-2 text-muted-foreground">
                 <li className="flex items-start space-x-3">
-                  <CheckCircle size={18} className="text-primary flex-shrink-0 mt-0.5" />
+                  <CheckCircle
+                    size={18}
+                    className="text-primary flex-shrink-0 mt-0.5"
+                  />
                   <span>
-                    The $3,000 fee for Class 41 is <strong className="text-foreground">non-refundable</strong>
+                    The $3,000 fee for Class 41 is{" "}
+                    <strong className="text-foreground">non-refundable</strong>
                   </span>
                 </li>
                 <li className="flex items-start space-x-3">
-                  <CheckCircle size={18} className="text-primary flex-shrink-0 mt-0.5" />
-                  <span>Money-back guarantee available if not satisfied after first week</span>
+                  <CheckCircle
+                    size={18}
+                    className="text-primary flex-shrink-0 mt-0.5"
+                  />
+                  <span>
+                    Money-back guarantee available if not satisfied after first
+                    week
+                  </span>
                 </li>
                 <li className="flex items-start space-x-3">
-                  <CheckCircle size={18} className="text-primary flex-shrink-0 mt-0.5" />
-                  <span>Payment plans available - contact admissions for details</span>
+                  <CheckCircle
+                    size={18}
+                    className="text-primary flex-shrink-0 mt-0.5"
+                  />
+                  <span>
+                    Payment plans available - contact admissions for details
+                  </span>
                 </li>
                 <li className="flex items-start space-x-3">
-                  <CheckCircle size={18} className="text-primary flex-shrink-0 mt-0.5" />
+                  <CheckCircle
+                    size={18}
+                    className="text-primary flex-shrink-0 mt-0.5"
+                  />
                   <span>All course materials and lifetime access included</span>
                 </li>
               </ul>
@@ -487,7 +595,8 @@ export default function CoursesPage() {
               Ready to <span className="gradient-text">Start Learning?</span>
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Join Class 41 and transform your career with comprehensive DevOps training
+              Join Class 41 and transform your career with comprehensive DevOps
+              training
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
               <Link
@@ -509,5 +618,5 @@ export default function CoursesPage() {
 
       <Footer />
     </main>
-  )
+  );
 }

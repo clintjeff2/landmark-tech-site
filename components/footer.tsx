@@ -1,5 +1,6 @@
-import Link from "next/link"
-import { Mail, Phone, MapPin, Linkedin, Youtube, Facebook } from "lucide-react"
+import Link from "next/link";
+import Image from "next/image";
+import { Mail, Phone, MapPin, Linkedin, Youtube, Facebook } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -14,16 +15,27 @@ export default function Footer() {
           {/* Company Info */}
           <div className="space-y-4">
             <div className="flex items-center space-x-3 group">
-              <div className="w-10 h-10 rounded-lg gradient-purple-pink flex items-center justify-center group-hover:scale-110 transition-transform">
-                <span className="text-white font-bold text-xl">LT</span>
+              <div className="relative w-10 h-10 group-hover:scale-110 transition-transform">
+                <Image
+                  src="/landmark-tech-logo.png"
+                  alt="Landmark Technologies Logo"
+                  width={40}
+                  height={40}
+                  className="object-contain"
+                />
               </div>
               <div className="flex flex-col">
-                <span className="text-foreground font-bold text-lg leading-tight">Landmark</span>
-                <span className="text-muted-foreground text-xs">Since 2005</span>
+                <span className="text-foreground font-bold text-lg leading-tight">
+                  Landmark Technologies
+                </span>
+                <span className="text-muted-foreground text-xs">
+                  Since 2005
+                </span>
               </div>
             </div>
             <p className="text-muted-foreground text-sm leading-relaxed">
-              Transforming careers through hands-on DevOps training from basic to expert level.
+              Transforming careers through hands-on DevOps training from basic
+              to expert level.
             </p>
           </div>
 
@@ -32,17 +44,26 @@ export default function Footer() {
             <h3 className="text-white font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/about" className="text-muted-foreground hover:text-primary transition-colors text-sm">
+                <Link
+                  href="/about"
+                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
+                >
                   About Us
                 </Link>
               </li>
               <li>
-                <Link href="/services" className="text-muted-foreground hover:text-primary transition-colors text-sm">
+                <Link
+                  href="/services"
+                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
+                >
                   Services
                 </Link>
               </li>
               <li>
-                <Link href="/courses" className="text-muted-foreground hover:text-primary transition-colors text-sm">
+                <Link
+                  href="/courses"
+                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
+                >
                   Courses
                 </Link>
               </li>
@@ -55,7 +76,10 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/faq" className="text-muted-foreground hover:text-primary transition-colors text-sm">
+                <Link
+                  href="/faq"
+                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
+                >
                   FAQ
                 </Link>
               </li>
@@ -99,7 +123,10 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/register" className="text-muted-foreground hover:text-primary transition-colors text-sm">
+                <Link
+                  href="/register"
+                  className="text-muted-foreground hover:text-primary transition-colors text-sm"
+                >
                   Register Now
                 </Link>
               </li>
@@ -112,7 +139,10 @@ export default function Footer() {
             <ul className="space-y-3">
               <li className="flex items-start space-x-3">
                 <Phone size={16} className="text-teal mt-1 flex-shrink-0" />
-                <a href="tel:+14372152483" className="text-muted-foreground hover:text-teal transition-colors text-sm">
+                <a
+                  href="tel:+14372152483"
+                  className="text-muted-foreground hover:text-teal transition-colors text-sm"
+                >
                   +1 437 215 2483
                 </a>
               </li>
@@ -127,18 +157,32 @@ export default function Footer() {
               </li>
               <li className="flex items-start space-x-3">
                 <MapPin size={16} className="text-orange mt-1 flex-shrink-0" />
-                <span className="text-muted-foreground text-sm">Online & Remote Training</span>
+                <span className="text-muted-foreground text-sm">
+                  Online & Remote Training
+                </span>
               </li>
             </ul>
 
             <div className="flex items-center space-x-4 mt-6">
-              <a href="#" className="text-muted-foreground hover:text-cyan transition-colors" aria-label="LinkedIn">
+              <a
+                href="#"
+                className="text-muted-foreground hover:text-cyan transition-colors"
+                aria-label="LinkedIn"
+              >
                 <Linkedin size={20} />
               </a>
-              <a href="#" className="text-muted-foreground hover:text-pink transition-colors" aria-label="YouTube">
+              <a
+                href="#"
+                className="text-muted-foreground hover:text-pink transition-colors"
+                aria-label="YouTube"
+              >
                 <Youtube size={20} />
               </a>
-              <a href="#" className="text-muted-foreground hover:text-purple transition-colors" aria-label="Facebook">
+              <a
+                href="#"
+                className="text-muted-foreground hover:text-purple transition-colors"
+                aria-label="Facebook"
+              >
                 <Facebook size={20} />
               </a>
             </div>
@@ -147,18 +191,25 @@ export default function Footer() {
 
         <div className="border-t border-border mt-12 pt-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <p className="text-muted-foreground text-sm">
-            © {new Date().getFullYear()} Landmark Technologies. All rights reserved.
+            © {new Date().getFullYear()} Landmark Technologies. All rights
+            reserved.
           </p>
           <div className="flex items-center space-x-6">
-            <Link href="/privacy" className="text-muted-foreground hover:text-primary transition-colors text-sm">
+            <Link
+              href="/privacy"
+              className="text-muted-foreground hover:text-primary transition-colors text-sm"
+            >
               Privacy Policy
             </Link>
-            <Link href="/terms" className="text-muted-foreground hover:text-primary transition-colors text-sm">
+            <Link
+              href="/terms"
+              className="text-muted-foreground hover:text-primary transition-colors text-sm"
+            >
               Terms of Service
             </Link>
           </div>
         </div>
       </div>
     </footer>
-  )
+  );
 }

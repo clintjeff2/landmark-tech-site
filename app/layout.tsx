@@ -81,6 +81,13 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        <link rel="icon" type="image/png" href="/landmark-tech-logo.png" />
+        <link
+          rel="shortcut icon"
+          type="image/png"
+          href="/landmark-tech-logo.png"
+        />
+        <link rel="apple-touch-icon" href="/landmark-tech-logo.png" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#667eea" />
       </head>

@@ -83,35 +83,37 @@ export default function Features() {
         style={{ animationDelay: "3s" }}
       />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-16 space-y-4">
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground text-balance">
+      <div className="container-responsive relative z-10">
+        <div className="text-center mb-12 sm:mb-16 space-y-3 sm:space-y-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground text-balance">
             Why Choose <span className="gradient-text-purple">Landmark</span>{" "}
             <span className="gradient-text-teal">Technologies</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
+          <p className="text-base sm:text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
             Training + Consulting hybrid approach: Learn from professionals who
             actively transform enterprise infrastructure while delivering
             real-world solutions
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           {features.map((feature, index) => (
             <div
               key={index}
-              className={`group p-8 rounded-2xl glass border-2 ${feature.borderColor} hover:border-opacity-100 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2`}
+              className={`group p-6 sm:p-8 rounded-2xl glass border-2 ${feature.borderColor} hover:border-opacity-100 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2`}
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <div
-                className={`w-16 h-16 rounded-xl ${feature.gradient} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg`}
+                className={`w-12 h-12 sm:w-16 sm:h-16 rounded-xl ${feature.gradient} flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform shadow-lg`}
               >
-                <feature.icon size={32} className="text-white" />
+                <feature.icon className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
               </div>
-              <h3 className={`text-xl font-bold ${feature.iconColor} mb-3`}>
+              <h3
+                className={`text-lg sm:text-xl font-bold ${feature.iconColor} mb-2 sm:mb-3`}
+              >
                 {feature.title}
               </h3>
-              <p className="text-muted-foreground leading-relaxed">
+              <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
                 {feature.description}
               </p>
             </div>

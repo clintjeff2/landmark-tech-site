@@ -1,7 +1,11 @@
+"use client";
+
 import Link from "next/link";
 import { CheckCircle, Clock, BookOpen, Award } from "lucide-react";
+import { useCurrentClass } from "@/hooks/useCurrentClass";
 
 export default function CourseOverview() {
+  const { currentClass, loading, formatPrice } = useCurrentClass();
   const modules = [
     { name: "DevOps Introduction", hours: "4", icon: "🚀", color: "text-cyan" },
     {
@@ -86,7 +90,12 @@ export default function CourseOverview() {
               <p className="text-xl text-muted-foreground leading-relaxed text-pretty">
                 Comprehensive training covering all essential DevOps tools and
                 practices. From Linux fundamentals to advanced Kubernetes
-                orchestration.
+                orchestration.{" "}
+                <span className="font-semibold text-cyan-500">
+                  Shaped by our consulting work with 50+ enterprise
+                  clients—learn real-world techniques proven in production
+                  environments.
+                </span>
               </p>
             </div>
 
@@ -168,10 +177,14 @@ export default function CourseOverview() {
                     <span className="text-muted-foreground">Program Fee</span>
                     <div className="text-right">
                       <div className="text-5xl font-bold gradient-text-orange-red">
-                        $3,000
+                        {loading ? "$3,000" : formatPrice().replace(" USD", "")}
                       </div>
                       <div className="text-sm text-muted-foreground">
-                        Non-refundable (Class 41)
+                        Non-refundable (
+                        {loading
+                          ? "Class 41"
+                          : currentClass?.name || "Class 41"}
+                        )
                       </div>
                     </div>
                   </div>
@@ -180,7 +193,8 @@ export default function CourseOverview() {
                     href="/register"
                     className="block w-full text-center bg-gradient-orange-red text-white hover:opacity-90 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:scale-105 shadow-xl"
                   >
-                    Enroll in Class 41
+                    Enroll in{" "}
+                    {loading ? "Class 41" : currentClass?.name || "Class 41"}
                   </Link>
 
                   <Link

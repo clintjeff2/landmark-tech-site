@@ -1,19 +1,38 @@
-import { Code, Cloud, Container, GitBranch, Shield, Zap } from "lucide-react"
+import {
+  Code,
+  Cloud,
+  Container,
+  GitBranch,
+  Shield,
+  Zap,
+  Briefcase,
+} from "lucide-react";
 
 export default function Features() {
   const features = [
     {
       icon: Code,
-      title: "Hands-On Labs",
-      description: "Real-world projects and scenarios. Build production-ready CI/CD pipelines from day one.",
+      title: "Hands-On Training Labs",
+      description:
+        "Real-world projects and scenarios. Build production-ready CI/CD pipelines from day one using live enterprise examples.",
       gradient: "gradient-purple-pink",
       iconColor: "text-purple",
       borderColor: "border-purple/30",
     },
     {
+      icon: Briefcase,
+      title: "Enterprise Consulting",
+      description:
+        "Benefit from our active DevOps consulting practice. Learn techniques we use to transform Fortune 500 infrastructure daily.",
+      gradient: "gradient-orange-red",
+      iconColor: "text-orange",
+      borderColor: "border-orange/30",
+    },
+    {
       icon: Cloud,
       title: "AWS Cloud Mastery",
-      description: "Complete AWS training including EC2, S3, EBS, IAM, and cloud architecture best practices.",
+      description:
+        "Complete AWS training including EC2, S3, EBS, IAM, and architecture best practices from enterprise deployments.",
       gradient: "gradient-orange-red",
       iconColor: "text-orange",
       borderColor: "border-orange/30",
@@ -21,15 +40,17 @@ export default function Features() {
     {
       icon: Container,
       title: "Docker & Kubernetes",
-      description: "45+ hours of containerization training. Master Docker, Kubernetes, and orchestration.",
+      description:
+        "45+ hours of containerization training. Master Docker, Kubernetes, and orchestration at enterprise scale.",
       gradient: "gradient-teal-cyan",
       iconColor: "text-cyan",
       borderColor: "border-cyan/30",
     },
     {
       icon: GitBranch,
-      title: "CI/CD Pipelines",
-      description: "Jenkins, Git, Maven, SonarQube integration. Automate everything from code to deployment.",
+      title: "CI/CD Automation",
+      description:
+        "Jenkins, Git, Maven, SonarQube integration. Automate everything from code to deployment like our consulting clients.",
       gradient: "gradient-signature",
       iconColor: "text-pink",
       borderColor: "border-pink/30",
@@ -37,20 +58,22 @@ export default function Features() {
     {
       icon: Shield,
       title: "Infrastructure as Code",
-      description: "Terraform and Ansible automation. Build scalable, repeatable infrastructure.",
+      description:
+        "Terraform and Ansible automation. Build scalable, repeatable infrastructure - proven in 50+ client environments.",
       gradient: "gradient-teal-cyan",
       iconColor: "text-teal",
       borderColor: "border-teal/30",
     },
     {
       icon: Zap,
-      title: "Job Assistance",
-      description: "Resume preparation, interview coaching, and career guidance until you land your role.",
+      title: "Career + Consulting Path",
+      description:
+        "Get hired as a DevOps Engineer OR start your own consulting practice. We show you both paths to $150K+.",
       gradient: "gradient-orange-red",
       iconColor: "text-yellow",
       borderColor: "border-yellow/30",
     },
-  ]
+  ];
 
   return (
     <section className="relative py-20 overflow-hidden">
@@ -67,11 +90,13 @@ export default function Features() {
             <span className="gradient-text-teal">Technologies</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
-            Comprehensive DevOps training designed to take you from beginner to industry-ready engineer
+            Training + Consulting hybrid approach: Learn from professionals who
+            actively transform enterprise infrastructure while delivering
+            real-world solutions
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {features.map((feature, index) => (
             <div
               key={index}
@@ -83,12 +108,16 @@ export default function Features() {
               >
                 <feature.icon size={32} className="text-white" />
               </div>
-              <h3 className={`text-xl font-bold ${feature.iconColor} mb-3`}>{feature.title}</h3>
-              <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
+              <h3 className={`text-xl font-bold ${feature.iconColor} mb-3`}>
+                {feature.title}
+              </h3>
+              <p className="text-muted-foreground leading-relaxed">
+                {feature.description}
+              </p>
             </div>
           ))}
         </div>
       </div>
     </section>
-  )
+  );
 }

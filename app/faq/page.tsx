@@ -5,9 +5,11 @@ import Footer from "@/components/footer";
 import { useState } from "react";
 import { ChevronDown, Search } from "lucide-react";
 import Link from "next/link";
+import { useCurrentClass } from "@/hooks/useCurrentClass";
 
 export default function FAQPage() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const { loading, formatPrice, pricing } = useCurrentClass();
   const [searchQuery, setSearchQuery] = useState("");
 
   const faqs = [
@@ -59,8 +61,13 @@ export default function FAQPage() {
       questions: [
         {
           question: "How much is the fee, and can I pay in installments?",
-          answer:
-            "The fee is $3,000 USD and can be paid in minimum installments of $750/month. You can also pay the complete fee upfront (recommended). Please type your name and class as payment reference/message and send screenshots to Prof Legah at +1 437 215 2483 and +1 647 267 6399 through WhatsApp/Telegram after each payment. IMPORTANT: Refrain from making Zelle or Cash App payments using phone numbers. Please use email only for transactions, sending payments to fees@mylandmarktech.com",
+          answer: loading
+            ? "The fee is $3,000 USD and can be paid in minimum installments of $750/month..."
+            : `The fee is ${formatPrice()} and can be paid in ${
+                pricing?.installmentAmount
+                  ? `installments of $${pricing.installmentAmount}/month over ${pricing.installmentPeriodMonths} months`
+                  : "installments"
+              }. You can also pay the complete fee upfront (recommended). Please type your name and class as payment reference/message and send screenshots to Prof Legah at +1 437 215 2483 and +1 647 267 6399 through WhatsApp/Telegram after each payment. IMPORTANT: Refrain from making Zelle or Cash App payments using phone numbers. Please use email only for transactions, sending payments to fees@mylandmarktech.com`,
         },
         {
           question: "How can I pay my fees?",
@@ -151,6 +158,38 @@ export default function FAQPage() {
           question: "What kind of job assistance do you provide?",
           answer:
             "We provide comprehensive career support including resume preparation, LinkedIn optimization, mock interviews, salary negotiation coaching, and job referrals. Our team works with you until you land your desired role.",
+        },
+      ],
+    },
+    {
+      category: "Consulting & Enterprise",
+      questions: [
+        {
+          question: "Does Landmark offer enterprise consulting services?",
+          answer:
+            "Yes! In addition to training, Landmark Technologies is an active consulting firm serving 50+ enterprise clients. We provide DevOps consulting, infrastructure transformation, CI/CD pipeline design, Kubernetes orchestration, cloud migration, and DevSecOps services. Our consulting team works on production systems for Fortune 500 companies.",
+        },
+        {
+          question: "Can I start a consulting practice after the course?",
+          answer:
+            "Absolutely! One of our dual career paths is 'DevOps Consultant.' After completing the program, you can leverage our mentorship to build your own consulting practice. We've coached graduates who now run 6-figure consulting businesses. You'll learn how our instructors—who are active consultants—build and scale their consulting ventures.",
+        },
+        {
+          question:
+            "How does Landmark's consulting experience improve the training?",
+          answer:
+            "Every module is informed by real challenges we solve for enterprise clients. Our instructors are active consultants, not just trainers. This means you learn battle-tested, production-proven techniques currently deployed in mission-critical environments at Fortune 500 companies. The curriculum directly reflects what works in the real world.",
+        },
+        {
+          question:
+            "Can enterprises hire Landmark for their DevOps consulting?",
+          answer:
+            "Yes! Organizations can engage Landmark Technologies for strategic DevOps consulting including: CI/CD pipeline design and implementation, Kubernetes and container orchestration, cloud migration strategies, DevSecOps and compliance frameworks, performance optimization and cost reduction, and 24/7 consulting support with SLAs. Contact us at contact@mylandmarktech.com for enterprise consulting inquiries.",
+        },
+        {
+          question: "Do students interact with Landmark's consulting team?",
+          answer:
+            "Yes! Since our instructors are active consultants, you'll learn directly from professionals who are solving real enterprise challenges. You'll hear case studies from live client projects, understand production architecture decisions, and learn the consulting mindset—all while developing your technical skills.",
         },
       ],
     },

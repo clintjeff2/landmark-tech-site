@@ -4,10 +4,12 @@ import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
 import { Star, Play, Quote, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
+import { useCurrentClass } from "@/hooks/useCurrentClass";
 
 export default function SuccessPage() {
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(0);
+  const { currentClass, loading, formatPrice } = useCurrentClass();
 
   const videoTestimonials = [
     {
@@ -179,7 +181,8 @@ export default function SuccessPage() {
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Hear from our graduates who transformed their careers and landed
-            roles at top tech companies
+            roles at top tech companies. Discover how many are now consultants
+            earning 6-7 figures independently.
           </p>
 
           <div className="flex flex-wrap justify-center gap-8 pt-8">
@@ -192,8 +195,10 @@ export default function SuccessPage() {
               <div className="text-muted-foreground">Job Placement</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold gradient-text">$150K</div>
-              <div className="text-muted-foreground">Avg. Salary</div>
+              <div className="text-4xl font-bold gradient-text">$150K+</div>
+              <div className="text-muted-foreground">
+                Avg. Salary (Consultants higher)
+              </div>
             </div>
           </div>
         </div>
@@ -289,7 +294,9 @@ export default function SuccessPage() {
                 href="/register"
                 className="inline-flex items-center justify-center bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:scale-105"
               >
-                Enroll in Class 41 - $3,000
+                Enroll in{" "}
+                {loading ? "Class 41" : currentClass?.name || "Class 41"} -{" "}
+                {loading ? "$3,000" : formatPrice()}
               </a>
             </div>
           </div>
@@ -448,15 +455,15 @@ export default function SuccessPage() {
               <span className="gradient-text">Your Success Story?</span>
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Join Class 41 and start your journey to a high-paying DevOps
-              career
+              Join {loading ? "Class 41" : currentClass?.name || "Class 41"} and
+              start your journey to a high-paying DevOps career
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
               <a
                 href="/register"
                 className="inline-flex items-center justify-center bg-primary text-primary-foreground hover:bg-primary/90 px-10 py-5 rounded-lg font-semibold text-lg transition-all duration-300 hover:scale-105"
               >
-                Enroll Now - $3,000
+                Enroll Now - {loading ? "$3,000" : formatPrice()}
               </a>
               <a
                 href="/contact"

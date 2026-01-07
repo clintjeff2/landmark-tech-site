@@ -73,16 +73,18 @@ export default function ServicesPage() {
     },
     {
       icon: Code,
-      title: "Consulting Services",
+      title: "Enterprise DevOps Consulting",
       description:
-        "Expert DevOps consulting to help your organization implement best practices and optimize workflows.",
+        "Strategic DevOps consulting and infrastructure transformation for enterprise organizations. We partner with Fortune 500 companies to design, implement, and optimize production-grade DevOps systems.",
       features: [
-        "CI/CD pipeline design",
-        "Infrastructure automation",
-        "Cloud migration strategy",
-        "Security and compliance",
+        "CI/CD pipeline design & implementation",
+        "Kubernetes & container orchestration strategy",
+        "Cloud migration & infrastructure automation",
+        "DevSecOps & compliance frameworks",
+        "Performance optimization & cost reduction",
+        "24/7 consulting support & SLAs",
       ],
-      cta: "Get Started",
+      cta: "Request Consultation",
       link: "/contact",
     },
   ];
@@ -128,8 +130,10 @@ export default function ServicesPage() {
               Our <span className="gradient-text">Services</span>
             </h1>
             <p className="text-xl text-muted-foreground leading-relaxed text-pretty">
-              Comprehensive DevOps training and consulting services designed to
-              accelerate your career or transform your organization.
+              World-class DevOps training + active enterprise consulting. We
+              train professionals AND transform enterprise infrastructure.
+              Whether you're launching a career or solving enterprise
+              challenges, we've got you covered.
             </p>
           </div>
         </div>
@@ -257,21 +261,21 @@ export default function ServicesPage() {
               Ready to Get <span className="gradient-text">Started?</span>
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Join thousands of professionals who have transformed their careers
-              with Landmark Technologies.
+              Whether you're launching your DevOps career or transforming your
+              enterprise infrastructure, we're here to help.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
               <Link
                 href="/register"
                 className="inline-flex items-center justify-center bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:scale-105"
               >
-                Enroll Now
+                Enroll in Training
               </Link>
               <Link
                 href="/contact"
                 className="inline-flex items-center justify-center bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300"
               >
-                Contact Us
+                Consulting Inquiry
               </Link>
             </div>
           </div>

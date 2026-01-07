@@ -3,9 +3,47 @@
 import Link from "next/link";
 import { CheckCircle, Clock, BookOpen, Award } from "lucide-react";
 import { useCurrentClass } from "@/hooks/useCurrentClass";
+import { useCountUp } from "@/hooks/useCountUp";
+
+function ModuleItem({ module, index }: { module: any; index: number }) {
+  const hoursCounter = useCountUp({
+    end: parseInt(module.hours),
+    duration: 2000,
+    suffix: "hrs",
+  });
+
+  return (
+    <div
+      key={index}
+      className="group flex items-center justify-between p-3 sm:p-4 rounded-xl glass border border-border hover:border-purple/30 transition-all duration-300 hover:scale-[1.02]"
+    >
+      <div className="flex items-center space-x-2 sm:space-x-3 flex-1 min-w-0">
+        <span className="text-xl sm:text-2xl group-hover:scale-110 transition-transform flex-shrink-0">
+          {module.icon}
+        </span>
+        <span
+          className={`font-semibold text-sm sm:text-base ${module.color} group-hover:text-foreground transition-colors truncate`}
+        >
+          {module.name}
+        </span>
+      </div>
+      <div className="flex items-center space-x-2 text-muted-foreground flex-shrink-0 ml-2">
+        <Clock size={16} className={module.color} />
+        <span
+          ref={hoursCounter.ref}
+          className="text-xs sm:text-sm font-medium whitespace-nowrap"
+        >
+          {hoursCounter.value}
+        </span>
+      </div>
+    </div>
+  );
+}
 
 export default function CourseOverview() {
   const { currentClass, loading, formatPrice } = useCurrentClass();
+  const totalHoursCounter = useCountUp({ end: 206, duration: 2500 });
+
   const modules = [
     { name: "DevOps Introduction", hours: "4", icon: "🚀", color: "text-cyan" },
     {
@@ -78,16 +116,16 @@ export default function CourseOverview() {
       <div className="absolute inset-0 bg-gradient-to-br from-purple/5 via-background to-teal/5" />
       <div className="absolute top-0 right-0 w-[600px] h-[600px] blob gradient-purple-pink opacity-10 blur-3xl" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+      <div className="container-responsive relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
           {/* Left: Course Details */}
-          <div className="space-y-8">
-            <div className="space-y-4">
-              <h2 className="text-4xl md:text-5xl font-bold text-foreground text-balance">
+          <div className="space-y-6 sm:space-y-8">
+            <div className="space-y-3 sm:space-y-4">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground text-balance">
                 DevOps E. Degree{" "}
                 <span className="gradient-text-purple">Curriculum</span>
               </h2>
-              <p className="text-xl text-muted-foreground leading-relaxed text-pretty">
+              <p className="text-base sm:text-lg lg:text-xl text-muted-foreground leading-relaxed text-pretty">
                 Comprehensive training covering all essential DevOps tools and
                 practices. From Linux fundamentals to advanced Kubernetes
                 orchestration.{" "}
@@ -99,43 +137,26 @@ export default function CourseOverview() {
               </p>
             </div>
 
-            <div className="space-y-3">
+            <div className="space-y-2 sm:space-y-3">
               {modules.map((module, index) => (
-                <div
-                  key={index}
-                  className="group flex items-center justify-between p-4 rounded-xl glass border border-border hover:border-purple/30 transition-all duration-300 hover:scale-[1.02]"
-                >
-                  <div className="flex items-center space-x-3">
-                    <span className="text-2xl group-hover:scale-110 transition-transform">
-                      {module.icon}
-                    </span>
-                    <span
-                      className={`font-semibold ${module.color} group-hover:text-foreground transition-colors`}
-                    >
-                      {module.name}
-                    </span>
-                  </div>
-                  <div className="flex items-center space-x-2 text-muted-foreground">
-                    <Clock size={16} className={module.color} />
-                    <span className="text-sm font-medium">
-                      {module.hours}hrs
-                    </span>
-                  </div>
-                </div>
+                <ModuleItem key={index} module={module} index={index} />
               ))}
             </div>
 
-            <div className="flex items-center space-x-4 pt-4">
+            <div className="flex flex-wrap items-center gap-4 pt-4">
               <div className="flex items-center space-x-2">
-                <BookOpen size={20} className="text-purple" />
-                <span className="font-semibold gradient-text-purple">
-                  206 Hours Total
+                <BookOpen size={20} className="text-purple flex-shrink-0" />
+                <span
+                  ref={totalHoursCounter.ref}
+                  className="font-semibold gradient-text-purple text-sm sm:text-base"
+                >
+                  {totalHoursCounter.value} Hours Total
                 </span>
               </div>
               <div className="h-6 w-px bg-gradient-to-b from-purple via-teal to-orange" />
               <div className="flex items-center space-x-2">
-                <Award size={20} className="text-teal" />
-                <span className="font-semibold gradient-text-teal">
+                <Award size={20} className="text-teal flex-shrink-0" />
+                <span className="font-semibold gradient-text-teal text-sm sm:text-base">
                   Certificate Included
                 </span>
               </div>
@@ -143,8 +164,8 @@ export default function CourseOverview() {
           </div>
 
           {/* Right: Benefits & Pricing */}
-          <div className="space-y-8">
-            <div className="relative p-8 rounded-2xl glass border-2 border-purple/30 shadow-2xl">
+          <div className="space-y-6 sm:space-y-8">
+            <div className="relative p-6 sm:p-8 rounded-2xl glass border-2 border-purple/30 shadow-2xl">
               {/* Gradient glow effect */}
               <div className="absolute -inset-0.5 gradient-purple-pink opacity-20 blur-xl rounded-2xl" />
 

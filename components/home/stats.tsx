@@ -1,4 +1,4 @@
-import { Users, Award, Briefcase, Globe } from "lucide-react"
+import { Users, Award, Briefcase, Globe } from "lucide-react";
 
 export default function Stats() {
   const stats = [
@@ -6,15 +6,15 @@ export default function Stats() {
       icon: Users,
       value: "5,000+",
       label: "Students Trained",
-      description: "Across 50+ countries",
+      description: "Active professionals worldwide",
       gradient: "gradient-purple-pink",
       color: "text-purple",
     },
     {
       icon: Award,
-      value: "18+",
-      label: "Years Experience",
-      description: "Since 2005",
+      value: "50+",
+      label: "Enterprise Clients",
+      description: "DevOps consulting partnerships",
       gradient: "gradient-teal-cyan",
       color: "text-teal",
     },
@@ -22,19 +22,19 @@ export default function Stats() {
       icon: Briefcase,
       value: "95%",
       label: "Job Placement",
-      description: "Career success rate",
+      description: "Training program success",
       gradient: "gradient-orange-red",
       color: "text-orange",
     },
     {
       icon: Globe,
-      value: "24/7",
-      label: "Support",
-      description: "Always available",
+      value: "$500K+",
+      label: "Client Project Value",
+      description: "Infrastructure transformations",
       gradient: "gradient-signature",
       color: "text-pink",
     },
-  ]
+  ];
 
   return (
     <section className="relative py-20 overflow-hidden">
@@ -57,14 +57,20 @@ export default function Stats() {
                 <stat.icon size={32} className="text-white" />
               </div>
               <div>
-                <div className={`text-5xl font-bold ${stat.color} mb-2`}>{stat.value}</div>
-                <div className="text-lg font-semibold text-foreground">{stat.label}</div>
-                <div className="text-sm text-muted-foreground mt-1">{stat.description}</div>
+                <div className={`text-5xl font-bold ${stat.color} mb-2`}>
+                  {stat.value}
+                </div>
+                <div className="text-lg font-semibold text-foreground">
+                  {stat.label}
+                </div>
+                <div className="text-sm text-muted-foreground mt-1">
+                  {stat.description}
+                </div>
               </div>
             </div>
           ))}
         </div>
       </div>
     </section>
-  )
+  );
 }

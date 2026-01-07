@@ -4,7 +4,7 @@ import type React from "react";
 
 import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Check,
   GraduationCap,
@@ -14,6 +14,15 @@ import {
   Phone,
   Globe,
 } from "lucide-react";
+import { db } from "@/app/mgt/lib/firebase";
+import {
+  collection,
+  addDoc,
+  Timestamp,
+  query,
+  where,
+  getDocs,
+} from "firebase/firestore";
 
 type FormData = {
   fullName: string;
@@ -22,29 +31,123 @@ type FormData = {
   country: string;
   city: string;
   cohort: string;
-  schedule: string;
   skillLevel: string;
   hearAboutUs: string;
   additionalComments: string;
   agreeToTerms: boolean;
 };
 
+type ClassData = {
+  id: string;
+  number: number;
+  name: string;
+  status: string;
+  startDate: any;
+  endDate: any;
+  startTime: string;
+  endTime: string;
+  timezone: string;
+  daysOfWeek: string[];
+  capacity: number;
+  enrolled: number;
+  description?: string;
+  isCurrentClass: boolean;
+};
+
+type PricingData = {
+  id: string;
+  classId: string;
+  basePrice: number;
+  currency: string;
+  installmentAmount?: number;
+  installmentPeriodMonths?: number;
+};
+
 export default function RegisterPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [currentClass, setCurrentClass] = useState<ClassData | null>(null);
+  const [pricing, setPricing] = useState<PricingData | null>(null);
   const [formData, setFormData] = useState<FormData>({
     fullName: "",
     email: "",
     phone: "",
     country: "",
     city: "",
-    cohort: "Class 41 - Sept 27, 2025",
-    schedule: "",
+    cohort: "",
     skillLevel: "",
     hearAboutUs: "",
     additionalComments: "",
     agreeToTerms: false,
   });
+
+  useEffect(() => {
+    const fetchClassAndPricing = async () => {
+      try {
+        // Fetch current class
+        const classesRef = collection(db, "classes");
+        const currentClassQuery = query(
+          classesRef,
+          where("isCurrentClass", "==", true)
+        );
+        const classSnapshot = await getDocs(currentClassQuery);
+
+        if (!classSnapshot.empty) {
+          const classDoc = classSnapshot.docs[0];
+          const classData = {
+            id: classDoc.id,
+            ...classDoc.data(),
+          } as ClassData;
+          setCurrentClass(classData);
+
+          // Set default cohort in form
+          const cohortName = `${classData.name} - ${formatDate(
+            classData.startDate
+          )}`;
+          setFormData((prev) => ({ ...prev, cohort: cohortName }));
+
+          // Fetch pricing for this class
+          const pricingRef = collection(db, "pricing");
+          const pricingQuery = query(
+            pricingRef,
+            where("classId", "==", classDoc.id)
+          );
+          const pricingSnapshot = await getDocs(pricingQuery);
+
+          if (!pricingSnapshot.empty) {
+            const pricingDoc = pricingSnapshot.docs[0];
+            const pricingData = {
+              id: pricingDoc.id,
+              ...pricingDoc.data(),
+            } as PricingData;
+            setPricing(pricingData);
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching class and pricing data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchClassAndPricing();
+  }, []);
+
+  const formatDate = (timestamp: any): string => {
+    if (!timestamp) return "";
+    const date = timestamp.toDate ? timestamp.toDate() : new Date(timestamp);
+    return date.toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    });
+  };
+
+  const formatDaysOfWeek = (days: string[]): string => {
+    if (!days || days.length === 0) return "";
+    return days.join(", ");
+  };
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -63,12 +166,32 @@ export default function RegisterPage() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    setTimeout(() => {
+    try {
+      // Save to Firestore
+      const studentsRef = collection(db, "students");
+      await addDoc(studentsRef, {
+        fullName: formData.fullName,
+        email: formData.email,
+        phone: formData.phone,
+        country: formData.country,
+        city: formData.city,
+        cohort: formData.cohort,
+        skillLevel: formData.skillLevel,
+        hearAboutUs: formData.hearAboutUs,
+        additionalComments: formData.additionalComments,
+        enrollmentStatus: "pending",
+        createdAt: Timestamp.now(),
+        updatedAt: Timestamp.now(),
+      });
+
       setIsSubmitting(false);
       setIsSubmitted(true);
       window.scrollTo({ top: 0, behavior: "smooth" });
-    }, 2000);
+    } catch (error) {
+      console.error("Error submitting registration:", error);
+      setIsSubmitting(false);
+      alert("Error submitting registration. Please try again.");
+    }
   };
 
   if (isSubmitted) {
@@ -134,22 +257,27 @@ export default function RegisterPage() {
 
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-4">
           <h1 className="text-4xl md:text-5xl font-bold text-foreground text-balance">
-            Enroll in <span className="gradient-text">Class 41</span>
+            Enroll in{" "}
+            <span className="gradient-text">
+              {loading ? "..." : currentClass?.name || "Class 41"}
+            </span>
           </h1>
           <p className="text-lg text-muted-foreground">
             Start your DevOps career journey. Complete the form below and our
             team will contact you.
           </p>
-          <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold">
-            <GraduationCap size={16} />
-            <span>Class starts: Sept 27, 2025</span>
-          </div>
+          {!loading && currentClass && (
+            <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold">
+              <GraduationCap size={16} />
+              <span>Class starts: {formatDate(currentClass.startDate)}</span>
+            </div>
+          )}
         </div>
       </section>
 
       {/* Form Section */}
       <section className="py-12 pb-20">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Main Form */}
             <div className="lg:col-span-2">
@@ -325,37 +453,29 @@ export default function RegisterPage() {
                       value={formData.cohort}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary focus:outline-none text-foreground"
+                      disabled={loading}
+                      className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary focus:outline-none text-foreground disabled:opacity-50"
                     >
-                      <option value="Class 41 - Sept 27, 2025">
-                        Class 41 - Sept 27, 2025
-                      </option>
+                      {loading ? (
+                        <option value="">Loading...</option>
+                      ) : currentClass ? (
+                        <option value={formData.cohort}>
+                          {currentClass.name} -{" "}
+                          {formatDate(currentClass.startDate)}
+                        </option>
+                      ) : (
+                        <option value="">No active class available</option>
+                      )}
                     </select>
-                    <p className="mt-2 text-sm text-muted-foreground">
-                      Sept 27, 2025 - Feb 28, 2026 | Mon, Tue, Sat: 7-10 PM EST
-                    </p>
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor="schedule"
-                      className="block text-sm font-semibold text-foreground mb-2"
-                    >
-                      Preferred Schedule *
-                    </label>
-                    <select
-                      id="schedule"
-                      name="schedule"
-                      value={formData.schedule}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary focus:outline-none text-foreground"
-                    >
-                      <option value="">Select schedule</option>
-                      <option value="Mon-Tue-Sat">
-                        Mon, Tue, Sat (7-10 PM EST)
-                      </option>
-                    </select>
+                    {!loading && currentClass && (
+                      <p className="mt-2 text-sm text-muted-foreground">
+                        {formatDate(currentClass.startDate)} -{" "}
+                        {formatDate(currentClass.endDate)} |{" "}
+                        {formatDaysOfWeek(currentClass.daysOfWeek)}:{" "}
+                        {currentClass.startTime} - {currentClass.endTime}{" "}
+                        {currentClass.timezone}
+                      </p>
+                    )}
                   </div>
 
                   <div>
@@ -450,8 +570,16 @@ export default function RegisterPage() {
                     <span className="text-sm text-muted-foreground leading-relaxed">
                       I agree to the terms and conditions and understand that
                       the admissions team will contact me to discuss payment
-                      options. I understand the program fee is $3,000 USD which
-                      can be paid in installments of $750/month. *
+                      options. I understand the program fee is{" "}
+                      {pricing
+                        ? `$${pricing.basePrice.toLocaleString()} ${
+                            pricing.currency
+                          }`
+                        : "$3,000 USD"}{" "}
+                      {pricing?.installmentAmount &&
+                        pricing?.installmentPeriodMonths &&
+                        `which can be paid in installments of $${pricing.installmentAmount}/month over ${pricing.installmentPeriodMonths} months`}
+                      . *
                     </span>
                   </label>
                 </div>
@@ -512,12 +640,32 @@ export default function RegisterPage() {
                   <div className="flex justify-between items-baseline mb-2">
                     <span className="text-muted-foreground">Program Fee</span>
                     <div className="text-right">
-                      <div className="text-2xl font-bold gradient-text">
-                        $3,000
-                      </div>
-                      <div className="text-xs text-muted-foreground">
-                        Installments available
-                      </div>
+                      {loading ? (
+                        <div className="text-2xl font-bold gradient-text">
+                          Loading...
+                        </div>
+                      ) : pricing ? (
+                        <>
+                          <div className="text-2xl font-bold gradient-text">
+                            ${pricing.basePrice.toLocaleString()}{" "}
+                            {pricing.currency}
+                          </div>
+                          {pricing.installmentAmount && (
+                            <div className="text-xs text-muted-foreground">
+                              ${pricing.installmentAmount}/month installments
+                            </div>
+                          )}
+                        </>
+                      ) : (
+                        <div className="text-2xl font-bold gradient-text">
+                          $3,000
+                        </div>
+                      )}
+                      {!loading && (
+                        <div className="text-xs text-muted-foreground">
+                          Installments available
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>

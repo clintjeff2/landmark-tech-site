@@ -34,8 +34,10 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-muted-foreground text-sm leading-relaxed">
-              Transforming careers through hands-on DevOps training from basic
-              to expert level.
+              World-class DevOps training academy + active consulting firm. We
+              train professionals AND transform enterprise infrastructure. Since
+              2005, we've been delivering career-changing education and solving
+              real enterprise challenges.
             </p>
           </div>
 

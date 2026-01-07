@@ -1,7 +1,11 @@
-import Link from "next/link"
-import { ArrowRight, Calendar, Users, Zap } from "lucide-react"
+"use client";
+
+import Link from "next/link";
+import { ArrowRight, Calendar, Users, Zap } from "lucide-react";
+import { useCurrentClass } from "@/hooks/useCurrentClass";
 
 export default function CTA() {
+  const { currentClass, loading, formatPrice, formatDate } = useCurrentClass();
   return (
     <section className="py-20 relative overflow-hidden">
       {/* Background gradient */}
@@ -11,10 +15,13 @@ export default function CTA() {
         <div className="bg-card border-2 border-primary/20 rounded-3xl p-12 md:p-16 text-center space-y-8 shadow-2xl">
           <div className="space-y-4">
             <h2 className="text-4xl md:text-5xl font-bold text-foreground text-balance">
-              Ready to <span className="gradient-text">Transform Your Career?</span>
+              Ready to{" "}
+              <span className="gradient-text">Transform Your Career?</span>
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto text-pretty">
-              Join Class 41 and start your journey to becoming a highly-paid DevOps engineer. Limited seats available.
+              Join {loading ? "Class 41" : currentClass?.name || "Class 41"} and
+              start your journey to becoming a highly-paid DevOps engineer—or
+              launch your consulting practice. Limited seats available.
             </p>
           </div>
 
@@ -25,8 +32,18 @@ export default function CTA() {
                 <Calendar size={20} className="text-primary" />
               </div>
               <div className="text-left">
-                <div className="font-bold text-foreground">Starts Soon</div>
-                <div className="text-sm text-muted-foreground">Class 41 Enrollment</div>
+                <div className="font-bold text-foreground">
+                  {loading
+                    ? "Starts Soon"
+                    : currentClass?.startDate
+                    ? formatDate(currentClass.startDate)
+                    : "Starts Soon"}
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  {loading
+                    ? "Class 41 Enrollment"
+                    : `${currentClass?.name || "Class 41"} Enrollment`}
+                </div>
               </div>
             </div>
 
@@ -38,7 +55,9 @@ export default function CTA() {
               </div>
               <div className="text-left">
                 <div className="font-bold text-foreground">Limited Seats</div>
-                <div className="text-sm text-muted-foreground">Only 30 spots left</div>
+                <div className="text-sm text-muted-foreground">
+                  Only 30 spots left
+                </div>
               </div>
             </div>
 
@@ -50,7 +69,9 @@ export default function CTA() {
               </div>
               <div className="text-left">
                 <div className="font-bold text-foreground">Fast Track</div>
-                <div className="text-sm text-muted-foreground">6-month program</div>
+                <div className="text-sm text-muted-foreground">
+                  6-month program
+                </div>
               </div>
             </div>
           </div>
@@ -61,25 +82,29 @@ export default function CTA() {
               href="/register"
               className="inline-flex items-center justify-center bg-primary text-primary-foreground hover:bg-primary/90 px-10 py-5 rounded-lg font-semibold text-lg transition-all duration-300 hover:scale-105 group"
             >
-              Enroll Now - $3,000
-              <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={20} />
+              Enroll in Training - {loading ? "$3,000" : formatPrice()}
+              <ArrowRight
+                className="ml-2 group-hover:translate-x-1 transition-transform"
+                size={20}
+              />
             </Link>
             <Link
-              href="/contact"
+              href="/contact?subject=consulting"
               className="inline-flex items-center justify-center bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-white px-10 py-5 rounded-lg font-semibold text-lg transition-all duration-300"
             >
-              Schedule a Call
+              Consulting Inquiry
             </Link>
           </div>
 
           {/* Trust indicators */}
           <div className="pt-8 border-t border-border">
             <p className="text-sm text-muted-foreground">
-              🔒 Secure payment • 💯 Money-back guarantee • 🎓 Certificate included
+              🔒 Secure payment • 💯 Money-back guarantee • 🎓 Certificate
+              included
             </p>
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }

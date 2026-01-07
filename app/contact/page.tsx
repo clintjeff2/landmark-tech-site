@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import Navigation from "@/components/navigation"
-import Footer from "@/components/footer"
-import { Mail, Phone, MapPin, Clock, Send } from "lucide-react"
-import { useState } from "react"
+import Navigation from "@/components/navigation";
+import Footer from "@/components/footer";
+import { Mail, Phone, MapPin, Clock, Send } from "lucide-react";
+import { useState } from "react";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -14,30 +14,36 @@ export default function ContactPage() {
     phone: "",
     subject: "",
     message: "",
-  })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle")
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<
+    "idle" | "success" | "error"
+  >("idle");
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
+    e.preventDefault();
+    setIsSubmitting(true);
 
     // Simulate form submission
     setTimeout(() => {
-      setIsSubmitting(false)
-      setSubmitStatus("success")
-      setFormData({ name: "", email: "", phone: "", subject: "", message: "" })
+      setIsSubmitting(false);
+      setSubmitStatus("success");
+      setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
 
-      setTimeout(() => setSubmitStatus("idle"), 5000)
-    }, 1500)
-  }
+      setTimeout(() => setSubmitStatus("idle"), 5000);
+    }, 1500);
+  };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
     setFormData((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
-    }))
-  }
+    }));
+  };
 
   return (
     <main className="min-h-screen">
@@ -53,8 +59,9 @@ export default function ContactPage() {
               Get in <span className="gradient-text">Touch</span>
             </h1>
             <p className="text-xl text-muted-foreground leading-relaxed text-pretty">
-              Have questions about our DevOps training program? We're here to help. Reach out and we'll get back to you
-              within 24 hours.
+              Questions about our DevOps training program or interested in
+              enterprise consulting? We're here to help. Reach out and we'll get
+              back to you within 24 hours.
             </p>
           </div>
         </div>
@@ -67,15 +74,22 @@ export default function ContactPage() {
             {/* Contact Information */}
             <div className="space-y-8">
               <div>
-                <h2 className="text-2xl font-bold text-foreground mb-6">Contact Information</h2>
+                <h2 className="text-2xl font-bold text-foreground mb-6">
+                  Contact Information
+                </h2>
                 <div className="space-y-6">
                   <div className="flex items-start space-x-4">
                     <div className="w-12 h-12 rounded-lg gradient-signature flex items-center justify-center flex-shrink-0">
                       <Phone size={20} className="text-white" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-foreground mb-1">Phone</h3>
-                      <a href="tel:+14372152483" className="text-muted-foreground hover:text-primary transition-colors">
+                      <h3 className="font-semibold text-foreground mb-1">
+                        Phone
+                      </h3>
+                      <a
+                        href="tel:+14372152483"
+                        className="text-muted-foreground hover:text-primary transition-colors"
+                      >
                         +1 437 215 2483
                       </a>
                     </div>
@@ -86,7 +100,9 @@ export default function ContactPage() {
                       <Mail size={20} className="text-white" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-foreground mb-1">Email</h3>
+                      <h3 className="font-semibold text-foreground mb-1">
+                        Email
+                      </h3>
                       <a
                         href="mailto:mylandmarktech@gmail.com"
                         className="text-muted-foreground hover:text-primary transition-colors break-all"
@@ -101,9 +117,15 @@ export default function ContactPage() {
                       <MapPin size={20} className="text-white" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-foreground mb-1">Location</h3>
-                      <p className="text-muted-foreground">Online & Remote Training</p>
-                      <p className="text-sm text-muted-foreground">Available Worldwide</p>
+                      <h3 className="font-semibold text-foreground mb-1">
+                        Location
+                      </h3>
+                      <p className="text-muted-foreground">
+                        Online & Remote Training
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        Available Worldwide
+                      </p>
                     </div>
                   </div>
 
@@ -112,9 +134,15 @@ export default function ContactPage() {
                       <Clock size={20} className="text-white" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-foreground mb-1">Business Hours</h3>
-                      <p className="text-muted-foreground">Monday - Friday: 9AM - 6PM EST</p>
-                      <p className="text-muted-foreground">Saturday: 10AM - 4PM EST</p>
+                      <h3 className="font-semibold text-foreground mb-1">
+                        Business Hours
+                      </h3>
+                      <p className="text-muted-foreground">
+                        Monday - Friday: 9AM - 6PM EST
+                      </p>
+                      <p className="text-muted-foreground">
+                        Saturday: 10AM - 4PM EST
+                      </p>
                       <p className="text-muted-foreground">Sunday: Closed</p>
                     </div>
                   </div>
@@ -150,24 +178,31 @@ export default function ContactPage() {
             {/* Contact Form */}
             <div className="lg:col-span-2">
               <div className="p-8 rounded-2xl bg-card border border-border">
-                <h2 className="text-2xl font-bold text-foreground mb-6">Send Us a Message</h2>
+                <h2 className="text-2xl font-bold text-foreground mb-6">
+                  Send Us a Message
+                </h2>
 
                 {submitStatus === "success" && (
                   <div className="mb-6 p-4 rounded-lg bg-green-500/10 border border-green-500/20 text-green-600">
-                    Thank you for your message! We'll get back to you within 24 hours.
+                    Thank you for your message! We'll get back to you within 24
+                    hours.
                   </div>
                 )}
 
                 {submitStatus === "error" && (
                   <div className="mb-6 p-4 rounded-lg bg-red-500/10 border border-red-500/20 text-red-600">
-                    Something went wrong. Please try again or contact us directly.
+                    Something went wrong. Please try again or contact us
+                    directly.
                   </div>
                 )}
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label htmlFor="name" className="block text-sm font-semibold text-foreground mb-2">
+                      <label
+                        htmlFor="name"
+                        className="block text-sm font-semibold text-foreground mb-2"
+                      >
                         Full Name *
                       </label>
                       <input
@@ -183,7 +218,10 @@ export default function ContactPage() {
                     </div>
 
                     <div>
-                      <label htmlFor="email" className="block text-sm font-semibold text-foreground mb-2">
+                      <label
+                        htmlFor="email"
+                        className="block text-sm font-semibold text-foreground mb-2"
+                      >
                         Email Address *
                       </label>
                       <input
@@ -201,7 +239,10 @@ export default function ContactPage() {
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label htmlFor="phone" className="block text-sm font-semibold text-foreground mb-2">
+                      <label
+                        htmlFor="phone"
+                        className="block text-sm font-semibold text-foreground mb-2"
+                      >
                         Phone Number
                       </label>
                       <input
@@ -216,7 +257,10 @@ export default function ContactPage() {
                     </div>
 
                     <div>
-                      <label htmlFor="subject" className="block text-sm font-semibold text-foreground mb-2">
+                      <label
+                        htmlFor="subject"
+                        className="block text-sm font-semibold text-foreground mb-2"
+                      >
                         Subject *
                       </label>
                       <select
@@ -231,15 +275,19 @@ export default function ContactPage() {
                         <option value="enrollment">Enrollment Inquiry</option>
                         <option value="course">Course Information</option>
                         <option value="payment">Payment & Pricing</option>
-                        <option value="technical">Technical Support</option>
+                        <option value="consulting">Consulting Services</option>
                         <option value="corporate">Corporate Training</option>
+                        <option value="technical">Technical Support</option>
                         <option value="other">Other</option>
                       </select>
                     </div>
                   </div>
 
                   <div>
-                    <label htmlFor="message" className="block text-sm font-semibold text-foreground mb-2">
+                    <label
+                      htmlFor="message"
+                      className="block text-sm font-semibold text-foreground mb-2"
+                    >
                       Message *
                     </label>
                     <textarea
@@ -277,5 +325,5 @@ export default function ContactPage() {
 
       <Footer />
     </main>
-  )
+  );
 }

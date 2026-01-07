@@ -1,38 +1,65 @@
-import Navigation from "@/components/navigation"
-import Footer from "@/components/footer"
-import { Globe, Target, Heart, Lightbulb } from "lucide-react"
+import Navigation from "@/components/navigation";
+import Footer from "@/components/footer";
+import { Globe, Target, Heart, Lightbulb } from "lucide-react";
 
 export default function AboutPage() {
   const values = [
     {
       icon: Target,
       title: "Excellence",
-      description: "We maintain the highest standards in DevOps education and training delivery.",
+      description:
+        "We maintain the highest standards in DevOps education and enterprise consulting delivery.",
     },
     {
       icon: Heart,
       title: "Student Success",
-      description: "Your career transformation is our primary mission and measure of success.",
+      description:
+        "Your career transformation is our primary mission and measure of success.",
     },
     {
       icon: Lightbulb,
       title: "Innovation",
-      description: "We continuously update our curriculum with the latest industry practices.",
+      description:
+        "We continuously update our curriculum with real-world techniques proven in our consulting work with enterprise clients.",
     },
     {
       icon: Globe,
       title: "Accessibility",
-      description: "Quality DevOps education should be accessible to everyone, everywhere.",
+      description:
+        "Quality DevOps education should be accessible to everyone, everywhere.",
     },
-  ]
+  ];
 
   const milestones = [
-    { year: "2005", title: "Founded", description: "Landmark Technologies established" },
-    { year: "2010", title: "1,000 Students", description: "Reached first major milestone" },
-    { year: "2015", title: "Global Expansion", description: "Training students in 50+ countries" },
-    { year: "2020", title: "5,000+ Alumni", description: "Growing community of DevOps professionals" },
-    { year: "2025", title: "Industry Leader", description: "Recognized as top DevOps training provider" },
-  ]
+    {
+      year: "2005",
+      title: "Founded",
+      description:
+        "Landmark Technologies established as DevOps training academy",
+    },
+    {
+      year: "2010",
+      title: "1,000 Students",
+      description: "Reached first major training milestone",
+    },
+    {
+      year: "2015",
+      title: "Global Expansion",
+      description: "Training students in 50+ countries",
+    },
+    {
+      year: "2020",
+      title: "Enterprise Consulting",
+      description:
+        "Launched consulting division, now serving 50+ enterprise clients",
+    },
+    {
+      year: "2025",
+      title: "Industry Leader",
+      description:
+        "Recognized as top DevOps training academy + active consulting firm",
+    },
+  ];
 
   return (
     <main className="min-h-screen">
@@ -45,11 +72,15 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-3xl space-y-6">
             <h1 className="text-5xl md:text-6xl font-bold text-foreground text-balance">
-              Transforming Careers <span className="gradient-text">Since 2005</span>
+              Transforming Careers & Infrastructure{" "}
+              <span className="gradient-text">Since 2005</span>
             </h1>
             <p className="text-xl text-muted-foreground leading-relaxed text-pretty">
-              Landmark Technologies has been at the forefront of DevOps education for nearly two decades, helping
-              thousands of professionals transition into high-paying tech careers.
+              Landmark Technologies has been at the forefront of DevOps
+              education and enterprise consulting for nearly two decades. We're
+              not just a training academy—we're an active consulting firm
+              solving real infrastructure challenges for Fortune 500 companies
+              while training the next generation of DevOps engineers.
             </p>
           </div>
         </div>
@@ -69,7 +100,9 @@ export default function AboutPage() {
             </div>
             <div className="text-center space-y-2">
               <div className="text-5xl font-bold gradient-text">50+</div>
-              <div className="text-muted-foreground">Countries Reached</div>
+              <div className="text-muted-foreground">
+                Enterprise Clients (Consulting)
+              </div>
             </div>
             <div className="text-center space-y-2">
               <div className="text-5xl font-bold gradient-text">95%</div>
@@ -88,18 +121,26 @@ export default function AboutPage() {
                 Our <span className="gradient-text">Mission</span>
               </h2>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                To democratize access to world-class DevOps education and empower individuals from all backgrounds to
-                build successful careers in technology.
+                To democratize access to world-class DevOps education while
+                solving real infrastructure challenges for enterprises. We're
+                building a bridge between aspiring professionals and
+                organizations that need them.
               </p>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                We believe that with the right training, mentorship, and support, anyone can master DevOps and secure a
-                high-paying role in the tech industry. Our comprehensive curriculum and hands-on approach have helped
-                thousands of students achieve their career goals.
+                We believe that with the right training, mentorship, and
+                support, anyone can master DevOps and secure a high-paying role.
+                Our unique advantage: we directly apply what we learn from our
+                consulting work with Fortune 500 clients into our curriculum,
+                ensuring students learn proven, production-ready techniques.
               </p>
             </div>
 
             <div className="relative h-[400px] rounded-2xl overflow-hidden border border-border bg-card">
-              <img src="/diverse-team-collaborating-on-computers-in-modern-.jpg" alt="Team collaboration" className="w-full h-full object-cover" />
+              <img
+                src="/diverse-team-collaborating-on-computers-in-modern-.jpg"
+                alt="Team collaboration"
+                className="w-full h-full object-cover"
+              />
             </div>
           </div>
         </div>
@@ -123,8 +164,12 @@ export default function AboutPage() {
                 <div className="inline-flex items-center justify-center w-16 h-16 rounded-full gradient-signature">
                   <value.icon size={28} className="text-white" />
                 </div>
-                <h3 className="text-xl font-bold text-foreground">{value.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{value.description}</p>
+                <h3 className="text-xl font-bold text-foreground">
+                  {value.title}
+                </h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  {value.description}
+                </p>
               </div>
             ))}
           </div>
@@ -138,19 +183,27 @@ export default function AboutPage() {
             <h2 className="text-4xl md:text-5xl font-bold text-foreground text-balance">
               Our <span className="gradient-text">Journey</span>
             </h2>
-            <p className="text-xl text-muted-foreground">Two decades of innovation and growth</p>
+            <p className="text-xl text-muted-foreground">
+              Two decades of innovation and growth
+            </p>
           </div>
 
           <div className="space-y-8">
             {milestones.map((milestone, index) => (
               <div key={index} className="flex items-start space-x-6 group">
                 <div className="flex-shrink-0 w-24 text-right">
-                  <div className="text-2xl font-bold gradient-text">{milestone.year}</div>
+                  <div className="text-2xl font-bold gradient-text">
+                    {milestone.year}
+                  </div>
                 </div>
                 <div className="flex-shrink-0 w-4 h-4 rounded-full bg-primary mt-2 group-hover:scale-150 transition-transform" />
                 <div className="flex-1 pb-8 border-l-2 border-border pl-6 -ml-2">
-                  <h3 className="text-xl font-bold text-foreground mb-2">{milestone.title}</h3>
-                  <p className="text-muted-foreground">{milestone.description}</p>
+                  <h3 className="text-xl font-bold text-foreground mb-2">
+                    {milestone.title}
+                  </h3>
+                  <p className="text-muted-foreground">
+                    {milestone.description}
+                  </p>
                 </div>
               </div>
             ))}
@@ -160,5 +213,5 @@ export default function AboutPage() {
 
       <Footer />
     </main>
-  )
+  );
 }

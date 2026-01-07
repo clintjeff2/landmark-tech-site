@@ -1,9 +1,13 @@
+"use client";
+
 import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
 import Link from "next/link";
 import { Download, Clock, CheckCircle, BookOpen, Award } from "lucide-react";
+import { useCurrentClass } from "@/hooks/useCurrentClass";
 
 export default function CoursesPage() {
+  const { currentClass, loading, formatPrice } = useCurrentClass();
   const courseModules = [
     {
       id: "devops-intro",
@@ -277,7 +281,11 @@ export default function CoursesPage() {
               <p className="text-xl text-muted-foreground leading-relaxed text-pretty">
                 Comprehensive hands-on training covering all essential DevOps
                 tools and practices. From Linux fundamentals to advanced
-                Kubernetes orchestration.
+                Kubernetes orchestration.{" "}
+                <span className="font-semibold text-cyan-500">
+                  Shaped by our active consulting work—learn production-ready
+                  techniques proven with 50+ enterprise clients.
+                </span>
               </p>
 
               <div className="flex flex-wrap gap-6 pt-4">
@@ -315,7 +323,7 @@ export default function CoursesPage() {
                   href="/register"
                   className="inline-flex items-center justify-center bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:scale-105"
                 >
-                  Enroll Now - $3,000
+                  Enroll Now - {loading ? "$3,000" : formatPrice()}
                 </Link>
                 <a
                   href="/Syllabus - DevOps E. Degree 2025.pdf"
@@ -400,10 +408,14 @@ export default function CoursesPage() {
                     <span className="text-muted-foreground">Program Fee</span>
                     <div className="text-right">
                       <div className="text-3xl font-bold text-foreground">
-                        $3,000
+                        {loading ? "$3,000" : formatPrice().replace(" USD", "")}
                       </div>
                       <div className="text-xs text-muted-foreground">
-                        Non-refundable (Class 41)
+                        Non-refundable (
+                        {loading
+                          ? "Class 41"
+                          : currentClass?.name || "Class 41"}
+                        )
                       </div>
                     </div>
                   </div>
@@ -463,6 +475,55 @@ export default function CoursesPage() {
                 </ul>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Consulting-Informed Curriculum Section */}
+      <section className="py-20 bg-gradient-to-r from-purple/5 via-background to-teal/5 border-y border-border">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center space-y-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground text-balance">
+              Why This Curriculum{" "}
+              <span className="gradient-text">Actually Works</span>
+            </h2>
+            <p className="text-xl text-muted-foreground leading-relaxed">
+              Every module is informed by real challenges we solve daily with
+              50+ enterprise clients. Our instructors aren't just training
+              experts—they're active consultants designing infrastructure for
+              Fortune 500 companies. This means you're not learning theoretical
+              DevOps; you're learning battle-tested, production-proven
+              techniques currently deployed in mission-critical environments.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-8">
+              <div className="p-6 rounded-xl bg-card border border-border space-y-3">
+                <div className="text-2xl font-bold gradient-text">50+</div>
+                <div className="font-semibold text-foreground">
+                  Enterprise Clients
+                </div>
+                <p className="text-sm text-muted-foreground">
+                  Real companies we transform every month
+                </p>
+              </div>
+              <div className="p-6 rounded-xl bg-card border border-border space-y-3">
+                <div className="text-2xl font-bold gradient-text">$500K+</div>
+                <div className="font-semibold text-foreground">
+                  Project Value
+                </div>
+                <p className="text-sm text-muted-foreground">
+                  Enterprise transformations we deliver
+                </p>
+              </div>
+              <div className="p-6 rounded-xl bg-card border border-border space-y-3">
+                <div className="text-2xl font-bold gradient-text">100%</div>
+                <div className="font-semibold text-foreground">
+                  Relevant Skills
+                </div>
+                <p className="text-sm text-muted-foreground">
+                  Everything taught is actively used in production
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -528,14 +589,17 @@ export default function CoursesPage() {
 
               <div className="p-6 rounded-xl bg-background border-2 border-primary/50 space-y-4 relative overflow-hidden">
                 <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-primary text-white text-xs font-bold">
-                  CLASS 41
+                  {loading ? "CLASS 41" : currentClass?.name || "CLASS 41"}
                 </div>
                 <h3 className="text-xl font-bold text-foreground">
                   Discounted Fee
                 </h3>
-                <div className="text-4xl font-bold gradient-text">$3,000</div>
+                <div className="text-4xl font-bold gradient-text">
+                  {loading ? "$3,000" : formatPrice().replace(" USD", "")}
+                </div>
                 <p className="text-muted-foreground">
-                  <strong>Non-refundable</strong> discounted fee for Class 41
+                  <strong>Non-refundable</strong> discounted fee for{" "}
+                  {loading ? "Class 41" : currentClass?.name || "Class 41"}
                 </p>
               </div>
             </div>
@@ -551,7 +615,8 @@ export default function CoursesPage() {
                     className="text-primary flex-shrink-0 mt-0.5"
                   />
                   <span>
-                    The $3,000 fee for Class 41 is{" "}
+                    The {loading ? "$3,000" : formatPrice()} fee for{" "}
+                    {loading ? "Class 41" : currentClass?.name || "Class 41"} is{" "}
                     <strong className="text-foreground">non-refundable</strong>
                   </span>
                 </li>
@@ -595,15 +660,15 @@ export default function CoursesPage() {
               Ready to <span className="gradient-text">Start Learning?</span>
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Join Class 41 and transform your career with comprehensive DevOps
-              training
+              Join {loading ? "Class 41" : currentClass?.name || "Class 41"} and
+              transform your career with comprehensive DevOps training
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
               <Link
                 href="/register"
                 className="inline-flex items-center justify-center bg-primary text-primary-foreground hover:bg-primary/90 px-10 py-5 rounded-lg font-semibold text-lg transition-all duration-300 hover:scale-105"
               >
-                Enroll Now - $3,000
+                Enroll Now - {loading ? "$3,000" : formatPrice()}
               </Link>
               <Link
                 href="/contact"

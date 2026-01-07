@@ -151,11 +151,32 @@
   --color-sidebar-ring: var(--sidebar-ring);
 
   /* Multiple creative gradients */
-  --gradient-signature: linear-gradient(90deg, #ff4d94 0%, #ff9fa8 50%, #ffd6cc 100%);
-  --gradient-teal-cyan: linear-gradient(135deg, var(--teal) 0%, var(--cyan) 100%);
-  --gradient-purple-pink: linear-gradient(135deg, var(--purple) 0%, var(--pink) 100%);
-  --gradient-orange-red: linear-gradient(135deg, var(--orange) 0%, #b00020 100%);
-  --gradient-mesh: radial-gradient(at 40% 20%, var(--purple) 0px, transparent 50%),
+  --gradient-signature: linear-gradient(
+    90deg,
+    #ff4d94 0%,
+    #ff9fa8 50%,
+    #ffd6cc 100%
+  );
+  --gradient-teal-cyan: linear-gradient(
+    135deg,
+    var(--teal) 0%,
+    var(--cyan) 100%
+  );
+  --gradient-purple-pink: linear-gradient(
+    135deg,
+    var(--purple) 0%,
+    var(--pink) 100%
+  );
+  --gradient-orange-red: linear-gradient(
+    135deg,
+    var(--orange) 0%,
+    #b00020 100%
+  );
+  --gradient-mesh: radial-gradient(
+      at 40% 20%,
+      var(--purple) 0px,
+      transparent 50%
+    ),
     radial-gradient(at 80% 0%, var(--cyan) 0px, transparent 50%),
     radial-gradient(at 0% 50%, var(--teal) 0px, transparent 50%),
     radial-gradient(at 80% 50%, var(--orange) 0px, transparent 50%),
@@ -206,6 +227,117 @@ html {
   body {
     @apply bg-background text-foreground antialiased;
   }
+}
+
+/* Responsive Container Classes for Better Spacing */
+.container-responsive {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .container-responsive {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .container-responsive {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-responsive {
+    max-width: 1024px;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container-responsive {
+    max-width: 1280px;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+}
+
+@media (min-width: 1536px) {
+  .container-responsive {
+    max-width: 1400px;
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+@media (min-width: 1920px) {
+  .container-responsive {
+    max-width: 1600px;
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+}
+
+/* Wide container for larger screens */
+.container-wide {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .container-wide {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .container-wide {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-wide {
+    max-width: 1280px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container-wide {
+    max-width: 1536px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .container-wide {
+    max-width: 1800px;
+  }
+}
+
+@media (min-width: 1920px) {
+  .container-wide {
+    max-width: 2000px;
+  }
+}
+
+/* Better text balance for headlines */
+.text-balance {
+  text-wrap: balance;
+}
+
+.text-pretty {
+  text-wrap: pretty;
 }
 
 /* Enhanced animations */
@@ -263,7 +395,12 @@ html {
 
 .animate-shimmer {
   animation: shimmer 3s linear infinite;
-  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.1) 50%, transparent 100%);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 100%
+  );
   background-size: 1000px 100%;
 }
 

@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { Star, Quote } from "lucide-react"
+import { Star, Quote } from "lucide-react";
 
 export default function Testimonials() {
   const testimonials = [
@@ -31,7 +31,7 @@ export default function Testimonials() {
       rating: 5,
       videoId: "dQw4w9WgXcQ", // Placeholder
     },
-  ]
+  ];
 
   return (
     <section className="py-20">
@@ -41,7 +41,9 @@ export default function Testimonials() {
             Success <span className="gradient-text">Stories</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
-            Join thousands of students who transformed their careers with Landmark Technologies
+            Join thousands of students who transformed their careers with
+            Landmark Technologies. Many are now employed at top companies, while
+            others launched successful consulting practices.
           </p>
         </div>
 
@@ -54,21 +56,34 @@ export default function Testimonials() {
               {/* Rating */}
               <div className="flex items-center space-x-1">
                 {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star key={i} size={18} className="fill-primary text-primary" />
+                  <Star
+                    key={i}
+                    size={18}
+                    className="fill-primary text-primary"
+                  />
                 ))}
               </div>
 
               {/* Quote */}
               <div className="relative">
-                <Quote size={32} className="text-primary/20 absolute -top-2 -left-2" />
-                <p className="text-muted-foreground leading-relaxed relative z-10 pl-6">{testimonial.content}</p>
+                <Quote
+                  size={32}
+                  className="text-primary/20 absolute -top-2 -left-2"
+                />
+                <p className="text-muted-foreground leading-relaxed relative z-10 pl-6">
+                  {testimonial.content}
+                </p>
               </div>
 
               {/* Author */}
               <div className="flex items-center space-x-4 pt-4 border-t border-border">
                 <div>
-                  <div className="font-semibold text-foreground">{testimonial.name}</div>
-                  <div className="text-sm text-muted-foreground">{testimonial.role}</div>
+                  <div className="font-semibold text-foreground">
+                    {testimonial.name}
+                  </div>
+                  <div className="text-sm text-muted-foreground">
+                    {testimonial.role}
+                  </div>
                 </div>
               </div>
             </div>
@@ -87,5 +102,5 @@ export default function Testimonials() {
         </div>
       </div>
     </section>
-  )
+  );
 }

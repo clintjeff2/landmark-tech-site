@@ -1,8 +1,12 @@
+"use client";
+
 import Link from "next/link";
 import { ArrowRight, Sparkles } from "lucide-react";
 import KubernetesDemoPlayer from "@/components/KubernetesDemoPlayer";
+import { useCurrentClass } from "@/hooks/useCurrentClass";
 
 export default function Hero() {
+  const { currentClass, loading, formatPrice } = useCurrentClass();
   return (
     <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
       <div className="absolute inset-0 gradient-mesh opacity-20" />
@@ -23,29 +27,38 @@ export default function Hero() {
             <div className="inline-block">
               <span className="px-4 py-2 rounded-full glass border border-purple/30 text-foreground text-sm font-semibold flex items-center gap-2 w-fit">
                 <Sparkles size={16} className="text-purple" />
-                Class 41 Now Enrolling
+                {loading ? "Loading..." : currentClass?.name || "Class 41"} Now
+                Enrolling
               </span>
             </div>
 
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-balance">
-              Transform Your Career with{" "}
-              <span className="gradient-text-purple">DevOps</span>{" "}
-              <span className="gradient-text-teal">Mastery</span>
+              Transform Your Career &{" "}
+              <span className="gradient-text-purple">
+                Enterprise Infrastructure
+              </span>{" "}
+              with <span className="gradient-text-teal">DevOps Excellence</span>
             </h1>
 
             <p className="text-xl text-muted-foreground leading-relaxed text-pretty">
-              Hands-on training from basic to expert level. Master{" "}
-              <span className="text-teal font-semibold">Linux</span>,{" "}
+              We're not just a training academy—we're a{" "}
+              <span className="text-primary font-semibold">
+                full-service DevOps consulting partner
+              </span>
+              . Train your team with industry-proven expertise while we help
+              your organization implement real-world DevOps transformations.
+              Master <span className="text-teal font-semibold">Linux</span>,{" "}
               <span className="text-orange font-semibold">AWS</span>,{" "}
               <span className="text-cyan font-semibold">Docker</span>,{" "}
               <span className="text-purple font-semibold">Kubernetes</span>,{" "}
-              <span className="text-pink font-semibold">Jenkins</span>, and
-              more.
+              <span className="text-pink font-semibold">Jenkins</span>, and more
+              through hands-on training + real enterprise consulting experience.{" "}
               <span className="text-foreground font-bold">
                 {" "}
-                $3,000 comprehensive program
+                {loading ? "$3,000" : formatPrice()} comprehensive program
               </span>{" "}
-              with job assistance and real-world projects.
+              with job assistance, consulting exposure, and real-world projects
+              from our client work.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
@@ -53,7 +66,7 @@ export default function Hero() {
                 href="/register"
                 className="inline-flex items-center justify-center bg-gradient-orange-red text-white hover:opacity-90 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:scale-105 group shadow-xl animate-glow"
               >
-                Enroll Now - $3,000
+                Enroll Now - {loading ? "$3,000" : formatPrice()}
                 <ArrowRight
                   className="ml-2 group-hover:translate-x-1 transition-transform"
                   size={20}
@@ -64,6 +77,12 @@ export default function Hero() {
                 className="inline-flex items-center justify-center glass border-2 border-teal text-foreground hover:bg-teal/10 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300"
               >
                 View Syllabus
+              </Link>
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center glass border-2 border-primary text-foreground hover:bg-primary/10 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300"
+              >
+                Consulting Inquiry
               </Link>
             </div>
 

@@ -1,12 +1,14 @@
-"use client"
+"use client";
 
-import Navigation from "@/components/navigation"
-import Footer from "@/components/footer"
-import { Star, Play, Quote } from "lucide-react"
-import { useState } from "react"
+import Navigation from "@/components/navigation";
+import Footer from "@/components/footer";
+import { Star, Play, Quote } from "lucide-react";
+import { useState } from "react";
+import { useCurrentClass } from "@/hooks/useCurrentClass";
 
 export default function TestimonialsPage() {
-  const [selectedVideo, setSelectedVideo] = useState<string | null>(null)
+  const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
+  const { loading, formatPrice } = useCurrentClass();
 
   const videoTestimonials = [
     {
@@ -51,7 +53,7 @@ export default function TestimonialsPage() {
       thumbnail: "/professional-man-smiling.png",
       company: "Airbnb",
     },
-  ]
+  ];
 
   const writtenTestimonials = [
     {
@@ -108,7 +110,7 @@ export default function TestimonialsPage() {
       rating: 5,
       salary: "$145,000/year",
     },
-  ]
+  ];
 
   return (
     <main className="min-h-screen">
@@ -123,7 +125,8 @@ export default function TestimonialsPage() {
             Student <span className="gradient-text">Success Stories</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Hear from our graduates who transformed their careers and landed roles at top tech companies
+            Hear from our graduates who transformed their careers and landed
+            roles at top tech companies
           </p>
 
           <div className="flex flex-wrap justify-center gap-8 pt-8">
@@ -150,12 +153,18 @@ export default function TestimonialsPage() {
             <h2 className="text-4xl md:text-5xl font-bold text-foreground text-balance">
               Video <span className="gradient-text">Testimonials</span>
             </h2>
-            <p className="text-xl text-muted-foreground">Watch our students share their success stories</p>
+            <p className="text-xl text-muted-foreground">
+              Watch our students share their success stories
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {videoTestimonials.map((video, index) => (
-              <div key={index} className="group cursor-pointer" onClick={() => setSelectedVideo(video.id)}>
+              <div
+                key={index}
+                className="group cursor-pointer"
+                onClick={() => setSelectedVideo(video.id)}
+              >
                 <div className="relative rounded-xl overflow-hidden border border-border hover:border-primary/50 transition-all duration-300 bg-background">
                   <div className="aspect-video relative">
                     <img
@@ -171,7 +180,9 @@ export default function TestimonialsPage() {
                   </div>
                   <div className="p-4">
                     <h3 className="font-bold text-foreground">{video.name}</h3>
-                    <p className="text-sm text-muted-foreground">{video.role}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {video.role}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -186,7 +197,10 @@ export default function TestimonialsPage() {
           className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
           onClick={() => setSelectedVideo(null)}
         >
-          <div className="max-w-4xl w-full" onClick={(e) => e.stopPropagation()}>
+          <div
+            className="max-w-4xl w-full"
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className="aspect-video rounded-xl overflow-hidden">
               <iframe
                 width="100%"
@@ -209,7 +223,9 @@ export default function TestimonialsPage() {
             <h2 className="text-4xl md:text-5xl font-bold text-foreground text-balance">
               What Our <span className="gradient-text">Students Say</span>
             </h2>
-            <p className="text-xl text-muted-foreground">Real stories from real graduates</p>
+            <p className="text-xl text-muted-foreground">
+              Real stories from real graduates
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -221,14 +237,23 @@ export default function TestimonialsPage() {
                 {/* Rating */}
                 <div className="flex items-center space-x-1">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} size={18} className="fill-primary text-primary" />
+                    <Star
+                      key={i}
+                      size={18}
+                      className="fill-primary text-primary"
+                    />
                   ))}
                 </div>
 
                 {/* Quote */}
                 <div className="relative">
-                  <Quote size={32} className="text-primary/20 absolute -top-2 -left-2" />
-                  <p className="text-muted-foreground leading-relaxed relative z-10 pl-6">{testimonial.content}</p>
+                  <Quote
+                    size={32}
+                    className="text-primary/20 absolute -top-2 -left-2"
+                  />
+                  <p className="text-muted-foreground leading-relaxed relative z-10 pl-6">
+                    {testimonial.content}
+                  </p>
                 </div>
 
                 {/* Author */}
@@ -240,8 +265,12 @@ export default function TestimonialsPage() {
                       className="w-12 h-12 rounded-full object-cover"
                     />
                     <div>
-                      <div className="font-semibold text-foreground">{testimonial.name}</div>
-                      <div className="text-sm text-muted-foreground">{testimonial.role}</div>
+                      <div className="font-semibold text-foreground">
+                        {testimonial.name}
+                      </div>
+                      <div className="text-sm text-muted-foreground">
+                        {testimonial.role}
+                      </div>
                     </div>
                   </div>
                   <div className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-semibold">
@@ -258,17 +287,19 @@ export default function TestimonialsPage() {
       <section className="py-20 bg-card border-y border-border">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
           <h2 className="text-4xl md:text-5xl font-bold text-foreground text-balance">
-            Ready to Write Your <span className="gradient-text">Success Story?</span>
+            Ready to Write Your{" "}
+            <span className="gradient-text">Success Story?</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Join thousands of professionals who transformed their careers with Landmark Technologies
+            Join thousands of professionals who transformed their careers with
+            Landmark Technologies
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
             <a
               href="/register"
               className="inline-flex items-center justify-center bg-primary text-primary-foreground hover:bg-primary/90 px-10 py-5 rounded-lg font-semibold text-lg transition-all duration-300 hover:scale-105"
             >
-              Enroll Now - $3,000
+              Enroll Now - {loading ? "$3,000" : formatPrice()}
             </a>
             <a
               href="/contact"
@@ -282,5 +313,5 @@ export default function TestimonialsPage() {
 
       <Footer />
     </main>
-  )
+  );
 }
